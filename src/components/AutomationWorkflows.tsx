@@ -217,6 +217,10 @@ export default function AutomationWorkflows() {
   }, [progress, currentWorkflow])
 
   const handlePlay = () => {
+    if (currentWorkflow && progress >= currentWorkflow.totalDuration) {
+      setProgress(0)
+      setCurrentStep(0)
+    }
     setIsPlaying(true)
   }
 
