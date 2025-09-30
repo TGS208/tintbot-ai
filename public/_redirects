@@ -1,0 +1,17 @@
+# API endpoints - highest priority
+/api/*  /.netlify/functions/:splat  200
+
+# Pretty URLs for main routes
+/features      /index.html  200
+/demo          /index.html  200
+/pricing       /index.html  200
+/assessment    /index.html  200
+/contact       /index.html  200
+/whitelabel    /index.html  200
+
+# Legacy redirects (if any old URLs need redirecting)
+/business-analysis  /assessment  301
+/get-started        /assessment  301
+
+# SPA fallback - must be last
+/*  /index.html  200
