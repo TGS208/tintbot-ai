@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tintbot.ai ROI Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #1e40af 50%, #1e293b 100%);
+        }
+        
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8,0,1,1);
+            }
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0,0,0.2,1);
+            }
+        }
+        
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg min-h-screen py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                    </svg>
+                    AI Demo & ROI Calculator
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-4">
+                    See How Much Our AI Can Save Your Tint Shop
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Enter your shop details and watch our AI chatbot in action while calculating your ROI
+                </p>
+            </div>
+
+            <!-- Calculator Card -->
+            <div class="card-glass rounded-2xl p-8 mb-8">
+                <div id="step-input" class="space-y-6">
+                    <h2 class="text-2xl font-semibold text-white mb-6">Enter Your Shop Details</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white font-medium mb-2">Shop Name</label>
+                            <input type="text" id="shopName" placeholder="Elite Tint & Graphics" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-2">Monthly Leads</label>
+                            <input type="number" id="monthlyLeads" placeholder="150" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-2">Average Job Value ($)</label>
+                            <input type="number" id="avgJobValue" placeholder="450" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-2">Staff Hourly Rate ($)</label>
+                            <input type="number" id="hourlyRate" placeholder="25" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-white font-medium mb-2">Current Booking Rate</label>
+                        <select id="bookingRate" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="">Select your current booking rate</option>
+                            <option value="15">15% - Struggling with lead quality</option>
+                            <option value="25">25% - Average performance</option>
+                            <option value="35">35% - Good lead conversion</option>
+                            <option value="45">45% - Excellent performance</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="startDemo()" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        Start AI Demo & Calculate ROI
+                    </button>
+                </div>
+
+                <!-- Chat Demo Section -->
+                <div id="step-chat" class="hidden">
+                    <div class="text-center mb-6">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></div>
+                            Live AI Demo in Progress
+                        </div>
+                    </div>
+                    
+                    <div id="chatContainer" class="bg-black/30 rounded-xl p-6 h-96 overflow-y-auto mb-6">
+                        <!-- Chat messages will be inserted here -->
+                    </div>
+                    
+                    <!-- Real-time stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="stat-card card-glass rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-blue-400" id="timesSaved">0</div>
+                            <div class="text-xs text-gray-400">Hours Saved/Week</div>
+                        </div>
+                        <div class="stat-card card-glass rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-green-400" id="leadsFiltered">0</div>
+                            <div class="text-xs text-gray-400">Unqualified Leads Filtered</div>
+                        </div>
+                        <div class="stat-card card-glass rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-orange-400" id="bookingIncrease">0%</div>
+                            <div class="text-xs text-gray-400">Booking Rate Increase</div>
+                        </div>
+                        <div class="stat-card card-glass rounded-lg p-4 text-center">
+                            <div class="text-2xl font-bold text-purple-400" id="monthlySavings">$0</div>
+                            <div class="text-xs text-gray-400">Monthly Savings</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="step-results" class="hidden">
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-500/20 text-green-300 border border-green-500/30 mb-4">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Demo Complete - Here's Your ROI
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2">
+                            Your Monthly Savings: <span id="finalSavings" class="text-orange-400">$0</span>
+                        </h3>
+                        <p class="text-gray-300">
+                            Based on your shop's metrics, here's what Tintbot.ai can do for you:
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="card-glass rounded-lg p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                </svg>
+                                Time Savings
+                            </h4>
+                            <div class="text-3xl font-bold text-blue-400 mb-2" id="finalTimesSaved">0 hours/week</div>
+                            <p class="text-gray-300 text-sm">Less time on unqualified calls</p>
+                        </div>
+                        
+                        <div class="card-glass rounded-lg p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Lead Quality
+                            </h4>
+                            <div class="text-3xl font-bold text-green-400 mb-2" id="finalLeadsFiltered">0 leads filtered</div>
+                            <p class="text-gray-300 text-sm">Unqualified leads screened out</p>
+                        </div>
+                        
+                        <div class="card-glass rounded-lg p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/>
+                                </svg>
+                                Booking Rate
+                            </h4>
+                            <div class="text-3xl font-bold text-orange-400 mb-2" id="finalBookingIncrease">+0%</div>
+                            <p class="text-gray-300 text-sm">Increase in qualified bookings</p>
+                        </div>
+                        
+                        <div class="card-glass rounded-lg p-6">
+                            <h4 class="text-white font-semibold mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                                </svg>
+                                ROI
+                            </h4>
+                            <div class="text-3xl font-bold text-purple-400 mb-2" id="finalROI">0%</div>
+                            <p class="text-gray-300 text-sm">Monthly return on investment</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-4">
+                        <h4 class="text-lg font-semibold text-white">Ready to Transform Your Tint Shop?</h4>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="#" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                                </svg>
+                                Start Free Trial
+                            </a>
+                            <button onclick="resetCalculator()" class="border border-white/20 text-white hover:bg-white/10 font-semibold py-3 px-6 rounded-lg transition-all duration-300 inline-flex items-center justify-center">
+                                Try Different Numbers
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 'input';
+        let roiData = {};
+        
+        const botMessages = [
+            "Hi! I'm your AI tint specialist. What type of car do you drive?",
+            "Great choice! A Tesla Model 3 looks amazing with ceramic tint. Are you looking to tint all windows or just the rear?",
+            "Perfect! For all windows, I recommend 35% ceramic tint. This will cost around $450-550.",
+            "I can check availability right now. What's your preferred day?",
+            "Excellent! I've found an opening this Friday at 2 PM. Shall I book it?",
+            "Perfect! Your appointment is confirmed. You'll receive a confirmation email."
+        ];
+        
+        const userMessages = [
+            "2023 Tesla Model 3",
+            "All windows please",
+            "Sounds good, what's the availability?",
+            "This Friday would be perfect",
+            "Yes, please book it!",
+            "Thank you!"
+        ];
+
+        function calculateROI() {
+            const leads = parseInt(document.getElementById('monthlyLeads').value) || 0;
+            const jobValue = parseInt(document.getElementById('avgJobValue').value) || 0;
+            const hourlyRate = parseInt(document.getElementById('hourlyRate').value) || 0;
+            const bookingRate = parseInt(document.getElementById('bookingRate').value) || 0;
+
+            const timesSaved = Math.round((leads * 0.3) / 4);
+            const leadsFiltered = Math.round(leads * 0.6);
+            const bookingIncrease = Math.round(bookingRate * 0.35);
+            const monthlySavings = Math.round(timesSaved * 4 * hourlyRate + (bookingIncrease * jobValue * 0.01));
+
+            return { timesSaved, leadsFiltered, bookingIncrease, monthlySavings };
+        }
+
+        function animateValue(elementId, start, end, duration, prefix = '', suffix = '') {
+            const element = document.getElementById(elementId);
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = prefix + current.toLocaleString() + suffix;
+                if (current === end) {
+                    clearInterval(timer);
+                }
+            }, stepTime);
+        }
+
+        function addChatMessage(type, message, delay = 0) {
+            setTimeout(() => {
+                const chatContainer = document.getElementById('chatContainer');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `mb-4 ${type === 'bot' ? 'text-left' : 'text-right'}`;
+                
+                const bubbleDiv = document.createElement('div');
+                bubbleDiv.className = `inline-block p-3 rounded-lg max-w-xs ${
+                    type === 'bot' 
+                        ? 'bg-blue-500/20 text-blue-300' 
+                        : 'bg-gray-500/20 text-gray-300'
+                }`;
+                bubbleDiv.textContent = message;
+                
+                messageDiv.appendChild(bubbleDiv);
+                chatContainer.appendChild(messageDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, delay);
+        }
+
+        function startDemo() {
+            const shopName = document.getElementById('shopName').value;
+            const monthlyLeads = document.getElementById('monthlyLeads').value;
+            
+            if (!shopName || !monthlyLeads) {
+                alert('Please fill in your shop name and monthly leads to continue.');
+                return;
+            }
+
+            roiData = calculateROI();
+            
+            // Switch to chat step
+            document.getElementById('step-input').classList.add('hidden');
+            document.getElementById('step-chat').classList.remove('hidden');
+            
+            // Clear chat container
+            document.getElementById('chatContainer').innerHTML = '';
+            
+            // Start chat simulation
+            let messageIndex = 0;
+            const chatInterval = setInterval(() => {
+                if (messageIndex < botMessages.length) {
+                    addChatMessage('bot', botMessages[messageIndex], 0);
+                    
+                    setTimeout(() => {
+                        if (messageIndex < userMessages.length) {
+                            addChatMessage('user', userMessages[messageIndex], 0);
+                        }
+                        messageIndex++;
+                    }, 1500);
+                } else {
+                    clearInterval(chatInterval);
+                    setTimeout(() => {
+                        showResults();
+                    }, 2000);
+                }
+            }, 3000);
+            
+            // Animate stats during chat
+            setTimeout(() => {
+                animateValue('timesSaved', 0, roiData.timesSaved, 2000);
+                animateValue('leadsFiltered', 0, roiData.leadsFiltered, 2000);
+                animateValue('bookingIncrease', 0, roiData.bookingIncrease, 2000, '', '%');
+                animateValue('monthlySavings', 0, roiData.monthlySavings, 2000, '$');
+            }, 1000);
+        }
+
+        function showResults() {
+            document.getElementById('step-chat').classList.add('hidden');
+            document.getElementById('step-results').classList.remove('hidden');
+            
+            // Update final results
+            document.getElementById('finalSavings').textContent = '$' + roiData.monthlySavings.toLocaleString();
+            document.getElementById('finalTimesSaved').textContent = roiData.timesSaved + ' hours/week';
+            document.getElementById('finalLeadsFiltered').textContent = roiData.leadsFiltered + ' leads filtered';
+            document.getElementById('finalBookingIncrease').textContent = '+' + roiData.bookingIncrease + '%';
+            
+            const roi = Math.round((roiData.monthlySavings / 249) * 100);
+            document.getElementById('finalROI').textContent = roi + '%';
+        }
+
+        function resetCalculator() {
+            document.getElementById('step-results').classList.add('hidden');
+            document.getElementById('step-input').classList.remove('hidden');
+            
+            // Clear form
+            document.getElementById('shopName').value = '';
+            document.getElementById('monthlyLeads').value = '';
+            document.getElementById('avgJobValue').value = '';
+            document.getElementById('hourlyRate').value = '';
+            document.getElementById('bookingRate').value = '';
+        }
+    </script>
+</body>
+</html>

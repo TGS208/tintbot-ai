@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Tintbot.ai</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <i class="fas fa-robot text-orange-500 text-2xl mr-2"></i>
+                    <span class="text-white text-xl font-bold">Tintbot.ai</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-orange-400 transition-colors">Home</a>
+                    <a href="features.html" class="text-white hover:text-orange-400 transition-colors">Features</a>
+                    <a href="demo.html" class="text-orange-400 font-semibold">Demo</a>
+                    <a href="pricing.html" class="text-white hover:text-orange-400 transition-colors">Pricing</a>
+                </div>
+                <a href="pricing.html" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-colors">
+                    See Pricing
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-6">
+                <i class="fas fa-comments mr-2"></i>
+                Interactive Tintbot.ai Demo
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                See Our AI in Action
+            </h1>
+            <p class="text-xl text-gray-300">
+                Watch how Tintbot.ai handles real customer conversations and calculates your ROI
+            </p>
+        </div>
+    </section>
+
+    <!-- Demo Chat Section -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-8">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-500/20 text-green-300 border border-green-500/30">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse mr-2"></div>
+                        Live AI Demo
+                    </div>
+                </div>
+                
+                <div class="bg-slate-900/50 rounded-xl p-6 h-96 overflow-y-auto mb-6">
+                    <!-- Sample Chat Messages -->
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            Hi! I'm your AI tint specialist. What type of car do you drive?
+                        </div>
+                    </div>
+                    <div class="mb-4 text-right">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-slate-600/50 text-gray-300">
+                            2024 Tesla Model 3
+                        </div>
+                    </div>
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            Great choice! A Tesla Model 3 looks amazing with ceramic tint. Are you looking to tint all windows or just the rear?
+                        </div>
+                    </div>
+                    <div class="mb-4 text-right">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-slate-600/50 text-gray-300">
+                            All windows please
+                        </div>
+                    </div>
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            Perfect! For all windows, I recommend 35% ceramic tint for the front and 20% for the rear. This will cost around $550-650.
+                        </div>
+                    </div>
+                    <div class="mb-4 text-right">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-slate-600/50 text-gray-300">
+                            Sounds good, what's the availability?
+                        </div>
+                    </div>
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            I can check availability right now. What's your preferred day this week?
+                        </div>
+                    </div>
+                    <div class="mb-4 text-right">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-slate-600/50 text-gray-300">
+                            This Friday would be perfect
+                        </div>
+                    </div>
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            Excellent! I've found an opening this Friday at 2 PM. Shall I book it for you?
+                        </div>
+                    </div>
+                    <div class="mb-4 text-right">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-slate-600/50 text-gray-300">
+                            Yes, please book it!
+                        </div>
+                    </div>
+                    <div class="mb-4 text-left">
+                        <div class="inline-block p-3 rounded-lg max-w-xs bg-orange-500/20 text-orange-300">
+                            Perfect! Your appointment is confirmed for Friday at 2 PM. You'll receive a confirmation email with our address and what to expect.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-700/50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-400">8</div>
+                        <div class="text-xs text-gray-400">Hours Saved/Week</div>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-green-400">90</div>
+                        <div class="text-xs text-gray-400">Unqualified Leads Filtered</div>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-orange-400">+35%</div>
+                        <div class="text-xs text-gray-400">Booking Rate Increase</div>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-purple-400">$2,400</div>
+                        <div class="text-xs text-gray-400">Monthly Savings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Calculate Your ROI
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Get a personalized savings estimate for your tint shop
+                </p>
+            </div>
+
+            <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-8">
+                <form name="roi-calculator" method="POST" data-netlify="true" class="space-y-6">
+                    <input type="hidden" name="form-name" value="roi-calculator" />
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white font-medium mb-2">Shop Name</label>
+                            <input
+                                type="text"
+                                name="shop_name"
+                                placeholder="Elite Tint & Graphics"
+                                class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-2">Monthly Leads</label>
+                            <input
+                                type="number"
+                                name="monthly_leads"
+                                placeholder="150"
+                                class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-white font-medium mb-2">Average Job Value ($)</label>
+                            <input
+                                type="number"
+                                name="avg_job_value"
+                                placeholder="450"
+                                class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-2">Staff Hourly Rate ($)</label>
+                            <input
+                                type="number"
+                                name="hourly_rate"
+                                placeholder="25"
+                                class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-white font-medium mb-2">Current Booking Rate (%)</label>
+                        <select
+                            name="booking_rate"
+                            class="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        >
+                            <option value="">Select booking rate</option>
+                            <option value="15">15% - Struggling with lead quality</option>
+                            <option value="25">25% - Average performance</option>
+                            <option value="35">35% - Good conversion</option>
+                            <option value="45">45% - Excellent performance</option>
+                        </select>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 text-lg rounded-lg transition-colors"
+                    >
+                        Calculate My ROI
+                        <i class="fas fa-chart-line ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Transform Your Tint Shop?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Join hundreds of tint professionals using Tintbot.ai to automate their lead qualification and grow their business.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="pricing.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                    Start Free Trial
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="features.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                    See All Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-robot text-orange-500 text-2xl mr-2"></i>
+                        <span class="text-white text-xl font-bold">Tintbot.ai</span>
+                    </div>
+                    <p class="text-gray-400">
+                        AI-powered platform built specifically for window tint professionals.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="features.html" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="demo.html" class="text-gray-400 hover:text-white">Demo</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Tintbot.ai</a></li>
+                        <li><a href="pricing.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span>+1 (208) 555-TINT</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>hello@tintbot.ai</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Boise, ID</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 TGS208 LLC. Tintbot.ai is a product of TGS208 LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

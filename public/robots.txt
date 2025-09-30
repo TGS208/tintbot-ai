@@ -1,0 +1,21 @@
+
+User-agent: *
+Allow: /
+
+# SEO-friendly pages
+Allow: /features
+Allow: /demo
+Allow: /pricing
+Allow: /whitelabel
+
+# Block admin/testing areas
+Disallow: /admin
+Disallow: /test
+Disallow: /staging
+Disallow: /api
+
+# Sitemap location
+Sitemap: https://tintbot.ai/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
