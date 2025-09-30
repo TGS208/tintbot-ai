@@ -1,9 +1,16 @@
 {
-  "name": "web-creator",
+  "name": "tintbot-ai",
   "version": "1.0.0",
+  "description": "AI-powered platform for window tint professionals",
   "scripts": {
     "dev": "node scripts/build.mjs",
-    "build": "node scripts/build.mjs --production"
+    "build": "node scripts/build.mjs --production",
+    "optimize": "node scripts/optimize.mjs",
+    "build:prod": "npm run build && npm run optimize",
+    "check-perf": "node scripts/check-performance.js",
+    "generate-badge": "node scripts/generate-badge.js",
+    "validate": "node scripts/validate-deployment.js",
+    "deploy-check": "npm run build:prod && npm run validate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
