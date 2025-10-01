@@ -10,7 +10,8 @@
     "check-perf": "node scripts/check-performance.js",
     "generate-badge": "node scripts/generate-badge.js",
     "validate": "node scripts/validate-deployment.js",
-    "deploy-check": "npm run build:prod && npm run validate"
+    "deploy-check": "npm run build:prod && npm run validate",
+    "pre-deploy": "bash scripts/pre-deploy-check.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
