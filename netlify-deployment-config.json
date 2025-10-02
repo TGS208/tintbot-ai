@@ -1,0 +1,223 @@
+{
+  "deployment": {
+    "platform": "netlify",
+    "site_name": "tintbot-ai",
+    "build_command": "npm run build:prod",
+    "publish_directory": "dist",
+    "functions_directory": "netlify/functions",
+    "node_version": "20"
+  },
+  "forms": {
+    "business-assessment-leads": {
+      "enabled": true,
+      "fields": ["name", "email", "phone", "business", "challenges"],
+      "spam_protection": true,
+      "notifications": true
+    },
+    "newsletter": {
+      "enabled": true,
+      "fields": ["email"],
+      "spam_protection": true
+    },
+    "partnership-inquiry": {
+      "enabled": true,
+      "fields": ["name", "email", "company", "message"],
+      "spam_protection": true
+    },
+    "contact": {
+      "enabled": true,
+      "fields": ["name", "email", "message"],
+      "spam_protection": true
+    }
+  },
+  "integrations": {
+    "required": [],
+    "optional": {
+      "google_sheets": {
+        "enabled": false,
+        "description": "Automatically save leads to Google Sheets",
+        "env_vars": [
+          "GOOGLE_SHEETS_CLIENT_EMAIL",
+          "GOOGLE_SHEETS_PRIVATE_KEY",
+          "GOOGLE_SHEET_ID"
+        ],
+        "setup_url": "https://console.cloud.google.com/apis/credentials",
+        "template_url": "https://docs.google.com/spreadsheets/d/TEMPLATE_ID/copy"
+      },
+      "slack": {
+        "enabled": false,
+        "description": "Get instant notifications in Slack",
+        "env_vars": [
+          "SLACK_WEBHOOK_URL"
+        ],
+        "setup_url": "https://api.slack.com/messaging/webhooks"
+      },
+      "email": {
+        "enabled": false,
+        "description": "Email notifications for new leads",
+        "env_vars": [
+          "SENDGRID_API_KEY",
+          "NOTIFICATION_EMAIL"
+        ],
+        "setup_url": "https://app.sendgrid.com/settings/api_keys"
+      },
+      "webhook": {
+        "enabled": false,
+        "description": "Send leads to custom webhook endpoint",
+        "env_vars": [
+          "CUSTOM_WEBHOOK_URL"
+        ]
+      },
+      "analytics": {
+        "enabled": false,
+        "description": "Track visitor behavior and conversions",
+        "env_vars": [
+          "GOOGLE_ANALYTICS_ID",
+          "FB_PIXEL_ID"
+        ]
+      }
+    }
+  },
+  "lead_scoring": {
+    "enabled": true,
+    "rules": {
+      "contact_info": {
+        "name": 15,
+        "email": 15,
+        "phone": 10
+      },
+      "business_info": {
+        "business_name": 15,
+        "vehicle_info": 10,
+        "vehicle_year": 5
+      },
+      "service_interest": {
+        "service_type": 10,
+        "urgent_timeline": 10
+      },
+      "additional_details": {
+        "detailed_description": 5,
+        "budget_specified": 5
+      }
+    },
+    "thresholds": {
+      "hot_lead": 80,
+      "warm_lead": 60,
+      "cold_lead": 0
+    }
+  },
+  "environment_variables": {
+    "required": [],
+    "optional": {
+      "notifications": {
+        "SLACK_WEBHOOK_URL": {
+          "description": "Slack webhook for instant lead alerts",
+          "example": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+          "validation": "^https://hooks\\.slack\\.com/",
+          "setup_url": "https://api.slack.com/messaging/webhooks"
+        },
+        "NOTIFICATION_EMAIL": {
+          "description": "Email address for lead notifications",
+          "example": "leads@yourbusiness.com",
+          "validation": "^[\\w.-]+@[\\w.-]+\\.\\w+$"
+        },
+        "SENDGRID_API_KEY": {
+          "description": "SendGrid API key for email notifications",
+          "example": "SG.xxxxxxxxxxxxxxxxxxxxxx",
+          "validation": "^SG\\.",
+          "setup_url": "https://app.sendgrid.com/settings/api_keys"
+        }
+      },
+      "google_sheets": {
+        "GOOGLE_SHEETS_CLIENT_EMAIL": {
+          "description": "Service account email from Google Cloud",
+          "example": "your-service@project.iam.gserviceaccount.com",
+          "validation": "^.*@.*\\.iam\\.gserviceaccount\\.com$",
+          "setup_url": "https://console.cloud.google.com/apis/credentials"
+        },
+        "GOOGLE_SHEETS_PRIVATE_KEY": {
+          "description": "Service account private key (JSON format)",
+          "example": "-----BEGIN PRIVATE KEY-----\\n...\\n-----END PRIVATE KEY-----",
+          "validation": "^-----BEGIN PRIVATE KEY-----"
+        },
+        "GOOGLE_SHEET_ID": {
+          "description": "Google Sheet ID from the URL",
+          "example": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms",
+          "validation": "^[a-zA-Z0-9-_]+$"
+        }
+      },
+      "analytics": {
+        "GOOGLE_ANALYTICS_ID": {
+          "description": "Google Analytics 4 measurement ID",
+          "example": "G-XXXXXXXXXX",
+          "validation": "^G-[A-Z0-9]+$"
+        },
+        "FB_PIXEL_ID": {
+          "description": "Facebook Pixel ID for tracking",
+          "example": "1234567890",
+          "validation": "^[0-9]+$"
+        }
+      },
+      "custom": {
+        "CUSTOM_WEBHOOK_URL": {
+          "description": "Custom webhook URL for lead routing",
+          "example": "https://yourdomain.com/webhook/leads",
+          "validation": "^https://"
+        }
+      }
+    }
+  },
+  "deployment_steps": [
+    {
+      "step": 1,
+      "name": "Validate Configuration",
+      "script": "node scripts/validate-deployment.js",
+      "required": true
+    },
+    {
+      "step": 2,
+      "name": "Build Production Assets",
+      "script": "npm run build:prod",
+      "required": true
+    },
+    {
+      "step": 3,
+      "name": "Test Functions Locally",
+      "script": "node scripts/test-functions.js",
+      "required": false
+    },
+    {
+      "step": 4,
+      "name": "Deploy to Netlify",
+      "script": "netlify deploy --prod",
+      "required": true
+    },
+    {
+      "step": 5,
+      "name": "Validate Live Deployment",
+      "script": "node scripts/validate-live-deployment.js",
+      "required": false
+    }
+  ],
+  "post_deployment": {
+    "tasks": [
+      "Visit Netlify Dashboard → Forms to see form submissions",
+      "Test form submission on live site",
+      "Configure optional integrations (Google Sheets, Slack, etc.)",
+      "Set up custom domain (optional)",
+      "Enable Netlify Analytics (optional)"
+    ]
+  },
+  "support": {
+    "documentation": [
+      "NETLIFY_OPTIMIZATION_ANALYSIS.md",
+      "NETLIFY_DEPLOYMENT_GUIDE.md",
+      "DEPLOYMENT_READY.md"
+    ],
+    "help_resources": [
+      "https://docs.netlify.com/forms/setup/",
+      "https://docs.netlify.com/functions/overview/",
+      "https://community.netlify.com/"
+    ]
+  }
+}
