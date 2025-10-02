@@ -11,7 +11,9 @@
     "generate-badge": "node scripts/generate-badge.js",
     "validate": "node scripts/validate-deployment.js",
     "deploy-check": "npm run build:prod && npm run validate",
-    "pre-deploy": "bash scripts/pre-deploy-check.sh"
+    "pre-deploy": "bash scripts/pre-deploy-check.sh",
+    "setup-deployment": "node scripts/setup-deployment.js",
+    "netlify-deploy": "npm run build:prod && npm run setup-deployment"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
