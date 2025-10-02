@@ -169,6 +169,7 @@ netlify dev
 
 ## 📞 Support
 
+- **Troubleshooting:** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common issues and solutions
 - **Windows Users:** [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) - PowerShell commands and troubleshooting
 - **Documentation:** See [docs](./docs) folder
 - **Issues:** [GitHub Issues](https://github.com/TGS208/tintbot-ai/issues)
@@ -190,7 +191,9 @@ netlify dev
 **Problem: PowerShell won't run commands**
 - Solution: See [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) for detailed Windows help
 
-For more troubleshooting, see the [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) (Windows) or [NETLIFY_QUICK_START.md](./NETLIFY_QUICK_START.md) (deployment issues).
+**More issues?** See the complete [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) guide.
+
+For more troubleshooting, see the [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) (all platforms), [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) (Windows), or [NETLIFY_QUICK_START.md](./NETLIFY_QUICK_START.md) (deployment issues).
 
 ## 📝 License
 
