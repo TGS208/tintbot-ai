@@ -26,6 +26,18 @@ function copyPublicAssets() {
       }
     })
     
+    // Also copy the main HTML files from root
+    const rootHtmlFiles = ['features.html', 'demo.html', 'pricing.html']
+    rootHtmlFiles.forEach(file => {
+      const sourcePath = file
+      const destPath = path.join(DIST_DIR, file)
+      
+      if (existsSync(sourcePath)) {
+        copyFileSync(sourcePath, destPath)
+        console.log(`  ✓ Copied ${file} from root`)
+      }
+    })
+    
     console.log('✅ Public assets copied to dist')
   } catch (error) {
     console.warn('⚠️ Public assets copy failed:', error.message)
