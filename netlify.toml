@@ -136,17 +136,17 @@
 # Pretty URLs (without .html extension)
 [[redirects]]
   from = "/features"
-  to = "/index.html"
+  to = "/features.html"
   status = 200
 
 [[redirects]]
   from = "/demo"
-  to = "/index.html"
+  to = "/demo.html"
   status = 200
 
 [[redirects]]
   from = "/pricing"
-  to = "/index.html"
+  to = "/pricing.html"
   status = 200
 
 [[redirects]]
