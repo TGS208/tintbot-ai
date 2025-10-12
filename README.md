@@ -36,6 +36,8 @@ npm run build
 # Open dist/index.html in your browser
 ```
 
+**Windows Users:** See [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) for PowerShell commands and troubleshooting
+
 ## ✨ Features
 
 - **🤖 AI Chatbot** - Qualifies leads automatically 24/7
@@ -167,9 +169,31 @@ netlify dev
 
 ## 📞 Support
 
+- **Troubleshooting:** [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common issues and solutions
+- **Windows Users:** [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) - PowerShell commands and troubleshooting
 - **Documentation:** See [docs](./docs) folder
 - **Issues:** [GitHub Issues](https://github.com/TGS208/tintbot-ai/issues)
 - **Deployment Help:** [NETLIFY_DEPLOYMENT_GUIDE.md](./NETLIFY_DEPLOYMENT_GUIDE.md)
+
+## ❓ Troubleshooting
+
+### Common Issues
+
+**Problem: "npm is not recognized"**
+- Solution: Install Node.js from https://nodejs.org/ and restart your terminal
+
+**Problem: Build fails or dist folder is empty**
+- Solution: Run `npm install --legacy-peer-deps` then `npm run build:prod`
+
+**Problem: Character encoding issues in terminal**
+- Solution: Use a text editor or browser to view HTML files, not terminal commands
+
+**Problem: PowerShell won't run commands**
+- Solution: See [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) for detailed Windows help
+
+**More issues?** See the complete [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) guide.
+
+For more troubleshooting, see the [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) (all platforms), [WINDOWS_GUIDE.md](./WINDOWS_GUIDE.md) (Windows), or [NETLIFY_QUICK_START.md](./NETLIFY_QUICK_START.md) (deployment issues).
 
 ## 📝 License
 
