@@ -6,10 +6,216 @@ ls dist<!DOCTYPE html>
     <title>Tintbot.ai - AI Platform Built for Window Tint Shops</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animated Gradient Background */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f172a, #312e81, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(249, 115, 22, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 3D Card Hover Effect */
+        .card-3d {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Glow Effect */
+        .glow {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
+        }
+
+        /* Scroll Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax */
+        .parallax {
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Custom Cursor Glow */
+        body {
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f97316;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+        }
+
+        .custom-cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s ease;
+        }
+
+        /* Floating Animation */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        /* Notification Popup */
+        .notification-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(249, 115, 22, 0.5);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+        }
+
+        .notification-popup.show {
+            transform: translateX(0);
+        }
+
+        /* Before/After Slider */
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #f97316;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: #f97316;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.8);
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.9); }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 min-h-screen">
+<body class="min-h-screen">
+    <!-- Particle Background -->
+    <div id="particles"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="notification-popup">
+        <div class="flex items-center">
+            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-check text-white"></i>
+            </div>
+            <div>
+                <div class="text-white font-semibold" id="notif-text">John D. just booked an appointment!</div>
+                <div class="text-gray-400 text-sm">Elite Tint & Graphics, Dallas TX</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
-    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+    <nav class="glass sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -30,32 +236,31 @@ ls dist<!DOCTYPE html>
     </nav>
 
     <!-- Hero Section -->
-
     <section class="relative py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
                 <!-- Hero Image -->
-                <div class="relative mb-8 flex justify-center">
-                    <img src="/public/tintbot-car.jpg" alt="Tintbot.ai Matrix Lamborghini" class="rounded-xl shadow-lg object-cover w-full max-w-3xl h-64 md:h-96" style="filter: brightness(0.7);">
+                <div class="relative mb-8 flex justify-center fade-in parallax">
+                    <img src="/public/tintbot-car.jpg" alt="Tintbot.ai Matrix Lamborghini" class="rounded-xl shadow-lg object-cover w-full max-w-3xl h-64 md:h-96 glow" style="filter: brightness(0.7);">
                     <div class="absolute inset-0 rounded-xl" style="background: linear-gradient(90deg, rgba(15,23,42,0.7) 0%, rgba(30,58,138,0.5) 100%);"></div>
                 </div>
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-6">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-6 pulse-glow floating fade-in">
                     <i class="fas fa-robot mr-2"></i>
                     Tintbot.ai - AI That Actually Works for Tint Shops
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">
                     Stop Losing Leads to
-                    <span class="text-orange-400"> Bad Forms</span>
+                    <span class="text-orange-400 glow-text"> Bad Forms</span>
                 </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 fade-in">
                     Transform your tint shop with AI that actually works. Tintbot.ai's intelligent platform qualifies leads, books appointments, and creates social content 24/7 - built specifically for window tint professionals.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="demo.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                    <a href="demo.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center pulse-glow hover:scale-105 transform">
                         Try Interactive Demo
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="features.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                    <a href="features.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center hover:scale-105 transform">
                         See Full Platform
                     </a>
                 </div>
@@ -63,24 +268,30 @@ ls dist<!DOCTYPE html>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8">
+    <!-- Stats Section with Animated Counters -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-bold text-orange-400">60%</div>
+                <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                    <div class="text-3xl md:text-4xl font-bold text-orange-400 glow-text">
+                        <span class="counter" data-target="60">0</span>%
+                    </div>
                     <div class="text-gray-300">Fewer Unqualified Leads</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-bold text-blue-400">12hrs</div>
+                <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                    <div class="text-3xl md:text-4xl font-bold text-blue-400 glow-text">
+                        <span class="counter" data-target="12">0</span>hrs
+                    </div>
                     <div class="text-gray-300">Weekly Time Saved</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-bold text-green-400">30%</div>
+                <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                    <div class="text-3xl md:text-4xl font-bold text-green-400 glow-text">
+                        <span class="counter" data-target="30">0</span>%
+                    </div>
                     <div class="text-gray-300">More Booked Jobs</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-400">24/7</div>
+                <div class="text-center transform hover:scale-110 transition-transform duration-300">
+                    <div class="text-3xl md:text-4xl font-bold text-purple-400 glow-text">24/7</div>
                     <div class="text-gray-300">Always Available</div>
                 </div>
             </div>
@@ -90,8 +301,8 @@ ls dist<!DOCTYPE html>
     <!-- Services Overview -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 glow-text">
                     AI Built for Your Tint Shop
                 </h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -101,8 +312,8 @@ ls dist<!DOCTYPE html>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- AI Lead Qualification -->
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
-                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mb-4 floating">
                         <i class="fas fa-robot text-orange-400 text-xl"></i>
                     </div>
                     <h3 class="text-white text-xl font-semibold mb-4">AI Lead Qualification Bot</h3>
@@ -118,8 +329,8 @@ ls dist<!DOCTYPE html>
                 </div>
 
                 <!-- Virtual Tint Preview -->
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
-                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 floating" style="animation-delay: 0.5s;">
                         <i class="fas fa-car text-blue-400 text-xl"></i>
                     </div>
                     <h3 class="text-white text-xl font-semibold mb-4">Virtual Tint Preview</h3>
@@ -135,8 +346,8 @@ ls dist<!DOCTYPE html>
                 </div>
 
                 <!-- Social Media Automation -->
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
-                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4 floating" style="animation-delay: 1s;">
                         <i class="fas fa-chart-bar text-green-400 text-xl"></i>
                     </div>
                     <h3 class="text-white text-xl font-semibold mb-4">Social Media Automation</h3>
@@ -157,8 +368,8 @@ ls dist<!DOCTYPE html>
     <!-- Testimonials -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 glow-text">
                     What Tint Shop Owners Say
                 </h2>
                 <p class="text-xl text-gray-300">
@@ -167,7 +378,7 @@ ls dist<!DOCTYPE html>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
@@ -191,7 +402,7 @@ ls dist<!DOCTYPE html>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
@@ -205,7 +416,7 @@ ls dist<!DOCTYPE html>
                         "The virtual preview feature is a game-changer. Customers can see exactly what their car will look like before we even start. Our booking rate increased by 40%."
                     </p>
                     <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3 pulse-glow">
                             <span class="text-white font-bold">SJ</span>
                         </div>
                         <div>
@@ -215,7 +426,7 @@ ls dist<!DOCTYPE html>
                     </div>
                 </div>
 
-                <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6">
+                <div class="glass rounded-lg p-6 card-3d fade-in">
                     <div class="flex items-center mb-4">
                         <div class="flex text-yellow-400">
                             <i class="fas fa-star"></i>
@@ -244,22 +455,22 @@ ls dist<!DOCTYPE html>
 
     <!-- Email Signup CTA -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 glow-text">
                 Ready to Stop Wasting Time on Bad Leads?
             </h2>
             <p class="text-xl text-gray-300 mb-8">
-                Join 200+ tint shops using Tintbot.ai to qualify leads, book appointments, and grow their business.
+                Join <span class="counter text-orange-400 font-bold glow-text" data-target="200">0</span>+ tint shops using Tintbot.ai to qualify leads, book appointments, and grow their business.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <a href="demo.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                <a href="demo.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center pulse-glow hover:scale-105 transform">
                     Start Free 30-Day Trial
                 </a>
-                <a href="pricing.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-colors inline-flex items-center justify-center">
+                <a href="pricing.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center hover:scale-105 transform">
                     Book Demo Call
                 </a>
             </div>
-            
+
             <!-- WORKING Email Signup Form -->
             <div class="max-w-md mx-auto">
                 <form name="newsletter" method="POST" data-netlify="true" class="flex gap-2">
@@ -269,9 +480,9 @@ ls dist<!DOCTYPE html>
                         name="email"
                         placeholder="Enter your email for updates"
                         required
-                        class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        class="flex-1 px-4 py-2 rounded-lg glass text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 glow"
                     />
-                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-colors">
+                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-all pulse-glow hover:scale-105 transform">
                         Subscribe
                     </button>
                 </form>
@@ -331,5 +542,179 @@ ls dist<!DOCTYPE html>
             </div>
         </div>
     </footer>
+
+    <script>
+        // ============ PARTICLE EFFECTS ============
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ============ CUSTOM CURSOR ============
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.custom-cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Make cursor bigger on hover over clickable elements
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // ============ SCROLL ANIMATIONS ============
+        function handleScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                if (rect.top < windowHeight * 0.85) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        // ============ ANIMATED COUNTERS ============
+        let countersAnimated = false;
+
+        function animateCounters() {
+            if (countersAnimated) return;
+
+            const counters = document.querySelectorAll('.counter');
+            const speed = 50; // Lower is faster
+
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                let count = 0;
+                const increment = target / speed;
+
+                const updateCount = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.textContent = Math.ceil(count);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCount();
+            });
+
+            countersAnimated = true;
+        }
+
+        // Check if counters are in viewport
+        function checkCounters() {
+            const statsSection = document.querySelector('.counter');
+            if (!statsSection) return;
+
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                animateCounters();
+            }
+        }
+
+        // ============ PARALLAX EFFECT ============
+        function handleParallax() {
+            const parallaxElements = document.querySelectorAll('.parallax');
+            const scrolled = window.pageYOffset;
+
+            parallaxElements.forEach(el => {
+                const speed = 0.5;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        }
+
+        // ============ NOTIFICATION POPUP ============
+        const notifications = [
+            { name: "John D.", shop: "Elite Tint & Graphics, Dallas TX" },
+            { name: "Sarah M.", shop: "Premium Auto Tint, Miami FL" },
+            { name: "Mike R.", shop: "Pro Tint Solutions, Phoenix AZ" },
+            { name: "Lisa K.", shop: "Crystal Clear Tinting, Seattle WA" },
+            { name: "David T.", shop: "Metro Window Tint, Chicago IL" }
+        ];
+
+        let notificationIndex = 0;
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            const notifText = document.getElementById('notif-text');
+            const currentNotif = notifications[notificationIndex];
+
+            notifText.textContent = `${currentNotif.name} just booked an appointment!`;
+            notification.querySelector('.text-gray-400').textContent = currentNotif.shop;
+
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+
+            notificationIndex = (notificationIndex + 1) % notifications.length;
+        }
+
+        // Show notification every 8 seconds
+        setInterval(showNotification, 8000);
+        setTimeout(showNotification, 2000); // Show first notification after 2 seconds
+
+        // ============ EVENT LISTENERS ============
+        window.addEventListener('scroll', () => {
+            handleScrollAnimations();
+            checkCounters();
+            handleParallax();
+        });
+
+        // ============ INITIALIZE ============
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            handleScrollAnimations();
+            checkCounters();
+
+            // Trigger initial animations for elements already in viewport
+            setTimeout(() => {
+                handleScrollAnimations();
+            }, 100);
+        });
+
+        // ============ SMOOTH SCROLL ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
