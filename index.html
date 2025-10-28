@@ -236,37 +236,140 @@ ls dist<!DOCTYPE html>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
+    <!-- Hero Section - Premium Branding -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Hero Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="/public/hero-tintbot.jpg"
+                 alt="Tintbot.ai - AI-Powered Window Tint Business Platform"
+                 class="w-full h-full object-cover"
+                 style="filter: brightness(0.4);">
+            <!-- Premium Gradient Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-blue-900/70 to-purple-900/80"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+
+            <!-- Animated Accent Lines -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-50 animate-pulse"></div>
+            <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50 animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <div class="text-center">
-                <!-- Hero Image -->
-                <div class="relative mb-8 flex justify-center fade-in parallax">
-                    <img src="/public/tintbot-car.jpg" alt="Tintbot.ai Matrix Lamborghini" class="rounded-xl shadow-lg object-cover w-full max-w-3xl h-64 md:h-96 glow" style="filter: brightness(0.7);">
-                    <div class="absolute inset-0 rounded-xl" style="background: linear-gradient(90deg, rgba(15,23,42,0.7) 0%, rgba(30,58,138,0.5) 100%);"></div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-8 fade-in">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-orange-500/30">
+                        <i class="fas fa-shield-halved text-orange-400 mr-2"></i>
+                        <span class="text-orange-300 text-sm font-semibold">Enterprise-Grade Security</span>
+                    </div>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-green-500/30">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        <span class="text-green-300 text-sm font-semibold">200+ Active Shops</span>
+                    </div>
+                    <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-blue-500/30">
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        <span class="text-blue-300 text-sm font-semibold">4.9/5 Rating</span>
+                    </div>
                 </div>
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 mb-6 pulse-glow floating fade-in">
-                    <i class="fas fa-robot mr-2"></i>
-                    Tintbot.ai - AI That Actually Works for Tint Shops
-                </div>
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in">
-                    Stop Losing Leads to
-                    <span class="text-orange-400 glow-text"> Bad Forms</span>
+
+                <!-- Main Headline -->
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 fade-in leading-tight">
+                    The AI Platform
+                    <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 glow-text">
+                        Built for Tint Shops
+                    </span>
                 </h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 fade-in">
-                    Transform your tint shop with AI that actually works. Tintbot.ai's intelligent platform qualifies leads, books appointments, and creates social content 24/7 - built specifically for window tint professionals.
+
+                <!-- Subheadline -->
+                <p class="text-xl md:text-2xl text-gray-200 max-w-4xl mx-auto mb-4 fade-in font-light">
+                    Stop wasting 15+ hours per week on unqualified leads.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
-                    <a href="demo.html" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center pulse-glow hover:scale-105 transform">
-                        Try Interactive Demo
-                        <i class="fas fa-arrow-right ml-2"></i>
+                <p class="text-2xl md:text-3xl text-white max-w-4xl mx-auto mb-12 fade-in font-bold">
+                    Let AI handle qualification, booking, and follow-up while you focus on premium installations.
+                </p>
+
+                <!-- Value Props -->
+                <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12 fade-in">
+                    <div class="glass rounded-xl p-6 border border-orange-500/20 hover:border-orange-500/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 pulse-glow">
+                            <i class="fas fa-robot text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Smart Lead Qualification</h3>
+                        <p class="text-gray-300 text-sm">AI understands ceramic vs carbon, legal limits, and your pricing—24/7</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 pulse-glow" style="animation-delay: 0.3s;">
+                            <i class="fas fa-calendar-check text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Instant Booking</h3>
+                        <p class="text-gray-300 text-sm">Convert qualified leads to appointments automatically</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border border-green-500/20 hover:border-green-500/50 transition-all">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 pulse-glow" style="animation-delay: 0.6s;">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">1,900%+ ROI</h3>
+                        <p class="text-gray-300 text-sm">Average $24K+ additional revenue in 6 months</p>
+                    </div>
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8 fade-in">
+                    <a href="demo.html" class="group relative inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-orange-500 to-red-500 rounded-xl overflow-hidden shadow-2xl hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+                        <span class="relative z-10 flex items-center">
+                            <i class="fas fa-play-circle mr-3 text-2xl"></i>
+                            Try Interactive Demo
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
-                    <a href="features.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center hover:scale-105 transform">
-                        See Full Platform
+                    <a href="pricing.html" class="group relative inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white border-2 border-white rounded-xl overflow-hidden hover:bg-white hover:text-slate-900 transition-all duration-300 transform hover:scale-105">
+                        <span class="relative z-10 flex items-center">
+                            <i class="fas fa-rocket mr-3 text-2xl"></i>
+                            Start Free Trial
+                        </span>
                     </a>
                 </div>
+
+                <!-- Social Proof Footer -->
+                <div class="flex flex-col items-center fade-in">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="flex -space-x-2">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center text-white font-bold border-2 border-slate-900">MR</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white font-bold border-2 border-slate-900">SJ</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center text-white font-bold border-2 border-slate-900">DK</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold border-2 border-slate-900">AL</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white text-xs font-bold border-2 border-slate-900">+196</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm">
+                        <span class="font-bold text-white">Join 200+ shop owners</span> who've automated their lead qualification
+                    </p>
+                    <div class="flex items-center gap-1 mt-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <span class="text-gray-400 text-sm ml-2">4.9/5 from 1,200+ reviews</span>
+                    </div>
+                </div>
+
+                <!-- Scroll Indicator -->
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 fade-in floating">
+                    <div class="flex flex-col items-center gap-2 text-white/50">
+                        <span class="text-sm uppercase tracking-wider">Scroll to explore</span>
+                        <i class="fas fa-chevron-down text-2xl"></i>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
     </section>
 
     <!-- AI Business Impact Visualization Section -->
