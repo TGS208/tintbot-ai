@@ -6,6 +6,7 @@ ls dist<!DOCTYPE html>
     <title>Tintbot.ai - AI Platform Built for Window Tint Shops</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         /* Animated Gradient Background */
         @keyframes gradientShift {
@@ -263,6 +264,191 @@ ls dist<!DOCTYPE html>
                     <a href="features.html" class="border border-white text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-all inline-flex items-center justify-center hover:scale-105 transform">
                         See Full Platform
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Business Impact Visualization Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 glow-text">
+                    See The Real Impact of AI on Your Window Tint Business
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Data-driven insights showing how Tintbot.ai transforms shop operations and revenue
+                </p>
+            </div>
+
+            <!-- Top Row: ROI Chart and Revenue Growth -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- ROI Comparison Chart -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">Monthly ROI Comparison</h3>
+                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-orange-400"></i>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">Average shop sees <span class="text-green-400 font-bold">1,900%+ ROI</span> in first 3 months</p>
+                    </div>
+                </div>
+
+                <!-- Revenue Growth Line Graph -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">6-Month Revenue Trajectory</h3>
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-arrow-trend-up text-blue-400"></i>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">Projected <span class="text-blue-400 font-bold">$24K+ additional revenue</span> in 6 months</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Row: Lead Funnel and Time Savings -->
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <!-- Lead Conversion Funnel -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">Lead Conversion Funnel</h3>
+                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-filter text-green-400"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Funnel visualization -->
+                        <div class="relative">
+                            <div class="bg-gradient-to-r from-orange-500 to-orange-600 h-12 rounded-lg flex items-center justify-between px-4 glow">
+                                <span class="text-white font-semibold">Website Visitors</span>
+                                <span class="text-white font-bold">1,000</span>
+                            </div>
+                        </div>
+                        <div class="relative ml-8">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-12 rounded-lg flex items-center justify-between px-4" style="width: 85%;">
+                                <span class="text-white font-semibold">AI Engaged</span>
+                                <span class="text-white font-bold">850</span>
+                            </div>
+                            <div class="absolute -right-16 top-3 text-green-400 text-sm font-bold">+70%</div>
+                        </div>
+                        <div class="relative ml-16">
+                            <div class="bg-gradient-to-r from-green-500 to-green-600 h-12 rounded-lg flex items-center justify-between px-4" style="width: 70%;">
+                                <span class="text-white font-semibold">Qualified Leads</span>
+                                <span class="text-white font-bold">420</span>
+                            </div>
+                            <div class="absolute -right-16 top-3 text-green-400 text-sm font-bold">+60%</div>
+                        </div>
+                        <div class="relative ml-24">
+                            <div class="bg-gradient-to-r from-purple-500 to-purple-600 h-12 rounded-lg flex items-center justify-between px-4 pulse-glow" style="width: 55%;">
+                                <span class="text-white font-semibold">Booked Jobs</span>
+                                <span class="text-white font-bold">168</span>
+                            </div>
+                            <div class="absolute -right-16 top-3 text-green-400 text-sm font-bold">+40%</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">AI increases booking rate from <span class="text-red-400">12%</span> to <span class="text-green-400 font-bold">16.8%</span></p>
+                    </div>
+                </div>
+
+                <!-- Time Savings Bar Chart -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">Weekly Time Savings</h3>
+                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-clock text-purple-400"></i>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">Save <span class="text-purple-400 font-bold">12-15 hours/week</span> on lead qualification alone</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row: AI Capability Radar and Market Stats -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- AI Capability Radar -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">AI Platform Capabilities</h3>
+                        <div class="w-10 h-10 bg-pink-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-pink-400"></i>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">Comprehensive AI solution for all aspects of your business</p>
+                    </div>
+                </div>
+
+                <!-- Market Opportunity Donut -->
+                <div class="glass rounded-xl p-6 card-3d fade-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-xl font-semibold">Window Tint Market Opportunity</h3>
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-bullseye text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="marketChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400 text-sm">$3.2B market with <span class="text-yellow-400 font-bold">8.4% CAGR</span> through 2030</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Dashboard -->
+            <div class="mt-8 glass rounded-xl p-8 card-3d fade-in">
+                <h3 class="text-white text-2xl font-bold text-center mb-8 glow-text">Key Performance Indicators</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center pulse-glow">
+                            <i class="fas fa-robot text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-orange-400 mb-2 counter" data-target="87">0</div>
+                        <div class="text-gray-300 text-sm">AI Accuracy Rate</div>
+                        <div class="text-gray-500 text-xs mt-1">Understanding customer needs</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center pulse-glow">
+                            <i class="fas fa-bolt text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-blue-400 mb-2"><span class="counter" data-target="4">0</span>min</div>
+                        <div class="text-gray-300 text-sm">Average Response Time</div>
+                        <div class="text-gray-500 text-xs mt-1">24/7 instant replies</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center pulse-glow">
+                            <i class="fas fa-calendar-check text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-green-400 mb-2 counter" data-target="73">0</div>
+                        <div class="text-gray-300 text-sm">Booking Conversion</div>
+                        <div class="text-gray-500 text-xs mt-1">From qualified leads</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center pulse-glow">
+                            <i class="fas fa-trophy text-white text-2xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-purple-400 mb-2 counter" data-target="94">0</div>
+                        <div class="text-gray-300 text-sm">Customer Satisfaction</div>
+                        <div class="text-gray-500 text-xs mt-1">Based on 1,200+ reviews</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -544,6 +730,240 @@ ls dist<!DOCTYPE html>
     </footer>
 
     <script>
+        // ============ CHART INITIALIZATION ============
+        function initializeCharts() {
+            // ROI Comparison Chart
+            const roiCtx = document.getElementById('roiChart').getContext('2d');
+            new Chart(roiCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Without Tintbot.ai',
+                        data: [100, 100, 100, 100, 100, 100],
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'With Tintbot.ai',
+                        data: [420, 580, 720, 850, 980, 1100],
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#fff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // Revenue Growth Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [{
+                        label: 'Additional Monthly Revenue',
+                        data: [2200, 3100, 3800, 4300, 4800, 5200],
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#fff' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#9ca3af',
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // Time Savings Chart
+            const timeCtx = document.getElementById('timeChart').getContext('2d');
+            new Chart(timeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phone Calls', 'Email Replies', 'Appointment Scheduling', 'Follow-ups', 'Social Media', 'Total Saved'],
+                    datasets: [{
+                        label: 'Hours Saved Per Week',
+                        data: [8, 3, 4, 2, 3, 20],
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.6)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(34, 197, 94, 0.6)',
+                            'rgba(168, 85, 247, 0.6)',
+                            'rgba(236, 72, 153, 0.6)',
+                            'rgba(234, 179, 8, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(236, 72, 153, 1)',
+                            'rgba(234, 179, 8, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#9ca3af',
+                                callback: function(value) {
+                                    return value + 'h';
+                                }
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#9ca3af',
+                                maxRotation: 45,
+                                minRotation: 45
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // AI Capability Radar Chart
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Lead Qualification', 'Customer Support', 'Appointment Booking', 'Follow-up Automation', 'Social Media Marketing', 'Analytics & Insights'],
+                    datasets: [{
+                        label: 'Tintbot.ai Capabilities',
+                        data: [95, 90, 92, 88, 85, 87],
+                        backgroundColor: 'rgba(236, 72, 153, 0.2)',
+                        borderColor: 'rgba(236, 72, 153, 1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(236, 72, 153, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#fff' }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#9ca3af',
+                                backdropColor: 'transparent'
+                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: {
+                                color: '#fff',
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Market Opportunity Donut Chart
+            const marketCtx = document.getElementById('marketChart').getContext('2d');
+            new Chart(marketCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AI-Enabled Shops (Target)', 'Traditional Shops', 'DIY Market', 'Commercial Segment'],
+                    datasets: [{
+                        data: [15, 45, 25, 15],
+                        backgroundColor: [
+                            'rgba(234, 179, 8, 0.8)',
+                            'rgba(249, 115, 22, 0.8)',
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(34, 197, 94, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(234, 179, 8, 1)',
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff',
+                                padding: 15,
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
         // ============ PARTICLE EFFECTS ============
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -696,6 +1116,7 @@ ls dist<!DOCTYPE html>
             createParticles();
             handleScrollAnimations();
             checkCounters();
+            initializeCharts();
 
             // Trigger initial animations for elements already in viewport
             setTimeout(() => {
