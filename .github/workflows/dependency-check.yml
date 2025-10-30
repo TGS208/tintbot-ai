@@ -1,0 +1,76 @@
+name: Dependency Update Check
+
+on:
+  schedule:
+    # Run weekly on Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  check-dependencies:
+    name: Check for Dependency Updates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Check for outdated packages
+        run: |
+          echo "## Dependency Update Report 📦" > dependency-report.md
+          echo "" >> dependency-report.md
+          echo "**Generated:** $(date)" >> dependency-report.md
+          echo "" >> dependency-report.md
+          echo "### Outdated Dependencies" >> dependency-report.md
+          echo "" >> dependency-report.md
+          npm outdated --json > outdated.json || true
+          if [ -s outdated.json ]; then
+            node -e "
+              const data = require('./outdated.json');
+              Object.keys(data).forEach(pkg => {
+                const info = data[pkg];
+                console.log(\`- **\${pkg}**: \${info.current} → \${info.latest}\`);
+              });
+            " >> dependency-report.md
+          else
+            echo "✅ All dependencies are up to date!" >> dependency-report.md
+          fi
+          
+          cat dependency-report.md >> $GITHUB_STEP_SUMMARY
+      
+      - name: Security audit
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Security Audit 🔒" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          npm audit --production --json > audit.json || true
+          node -e "
+            const audit = require('./audit.json');
+            const vulns = audit.metadata?.vulnerabilities || {};
+            const total = Object.values(vulns).reduce((a, b) => a + b, 0);
+            if (total > 0) {
+              console.log('⚠️ Found ' + total + ' vulnerabilities');
+              console.log('- Critical: ' + (vulns.critical || 0));
+              console.log('- High: ' + (vulns.high || 0));
+              console.log('- Moderate: ' + (vulns.moderate || 0));
+              console.log('- Low: ' + (vulns.low || 0));
+            } else {
+              console.log('✅ No security vulnerabilities found');
+            }
+          " >> $GITHUB_STEP_SUMMARY
+      
+      - name: Upload dependency report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-report
+          path: |
+            dependency-report.md
+            outdated.json
+            audit.json
+          retention-days: 30

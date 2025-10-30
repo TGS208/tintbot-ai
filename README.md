@@ -1,5 +1,8 @@
 # 🤖 Tintbot.ai
 
+[![CI](https://github.com/TGS208/tintbot-ai/workflows/CI%20-%20Build%20and%20Test/badge.svg)](https://github.com/TGS208/tintbot-ai/actions/workflows/ci.yml)
+[![Deploy](https://github.com/TGS208/tintbot-ai/workflows/Deploy%20to%20Netlify/badge.svg)](https://github.com/TGS208/tintbot-ai/actions/workflows/deploy-netlify.yml)
+[![Code Quality](https://github.com/TGS208/tintbot-ai/workflows/Code%20Quality/badge.svg)](https://github.com/TGS208/tintbot-ai/actions/workflows/code-quality.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-SITE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
 
 **AI-Powered Platform for Window Tint Professionals**
@@ -90,6 +93,23 @@ npm run build && node scripts/optimize.mjs
 - **Vercel:** Deploy via `vercel` command
 - **Cloudflare Pages:** Connect GitHub repo
 - **GitHub Pages:** Build and deploy dist/ folder
+
+## 🔄 CI/CD & Automation
+
+This repository uses GitHub Actions for continuous integration and deployment:
+
+### Automated Workflows
+- **CI Build & Test** - Validates builds on every push and PR
+- **Code Quality** - Checks code quality and security on every push
+- **PR Validation** - Automatically validates pull requests
+- **Netlify Deploy** - Auto-deploys to Netlify on main branch updates
+- **Dependency Checks** - Weekly security and update scans
+- **Release Creation** - Automated releases with build artifacts
+
+**See:** [.github/workflows/README.md](./.github/workflows/README.md) for detailed workflow documentation.
+
+### Workflow Status
+All workflows are configured and ready to run. Check the badges at the top of this README for current status.
 
 ## 🔧 Configuration
 
