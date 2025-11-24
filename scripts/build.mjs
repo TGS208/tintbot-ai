@@ -52,6 +52,11 @@ try {
     copyFileSync('pricing.html', 'dist/pricing.html')
   }
 
+  console.log('✅ Copying quote.html to dist/')
+  if (existsSync('quote.html')) {
+    copyFileSync('quote.html', 'dist/quote.html')
+  }
+
   console.log('✅ Copying public assets (including hero image) to dist/public/')
   if (existsSync('public')) {
     copyDirectory('public', 'dist/public')
