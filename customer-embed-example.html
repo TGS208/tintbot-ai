@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Tint Shop Website with Tintbot.ai Embedded</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .example-site {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .content {
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .code-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-box pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .highlight {
+            background: #fbbf24;
+            color: #000;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .step {
+            background: #f1f5f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .success {
+            background: #dcfce7;
+            border-left: 4px solid #22c55e;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="example-site">
+        <div class="header">
+            <h1>🚗 Premium Tint Shop</h1>
+            <p>Example Customer Website</p>
+        </div>
+
+        <div class="content">
+            <h2>How This Shop Owner Embedded Tintbot.ai</h2>
+
+            <div class="step">
+                <h3>📋 Step 1: They Copied This Code</h3>
+                <p>You gave them this simple snippet:</p>
+                <div class="code-box">
+<pre><span style="color: #94a3b8;"><!-- Add this before closing &lt;/body&gt; tag --></span>
+<span style="color: #60a5fa;">&lt;script</span> <span style="color: #34d399;">src="https://tintbot.ai/embed.js"</span><span style="color: #60a5fa;">&gt;&lt;/script&gt;</span>
+<span style="color: #60a5fa;">&lt;script&gt;</span>
+  Tintbot.init({
+    shopId: <span style="color: #34d399;">'<span class="highlight">SHOP_ABC123</span>'</span>  <span style="color: #94a3b8;">// Unique ID you provide them</span>
+  });
+<span style="color: #60a5fa;">&lt;/script&gt;</span></pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>📝 Step 2: They Pasted It Into Their Website</h3>
+                <p>They opened their website code and pasted it before the <code>&lt;/body&gt;</code> tag. That's it!</p>
+
+                <div class="code-box">
+<pre><span style="color: #94a3b8;">&lt;!-- Their existing website code --&gt;</span>
+<span style="color: #60a5fa;">&lt;html&gt;</span>
+<span style="color: #60a5fa;">&lt;head&gt;</span>
+  <span style="color: #60a5fa;">&lt;title&gt;</span>Premium Tint Shop<span style="color: #60a5fa;">&lt;/title&gt;</span>
+<span style="color: #60a5fa;">&lt;/head&gt;</span>
+<span style="color: #60a5fa;">&lt;body&gt;</span>
+
+  <span style="color: #94a3b8;">&lt;!-- Their existing content --&gt;</span>
+  <span style="color: #60a5fa;">&lt;h1&gt;</span>Welcome to our shop!<span style="color: #60a5fa;">&lt;/h1&gt;</span>
+  <span style="color: #60a5fa;">&lt;p&gt;</span>We do window tinting...<span style="color: #60a5fa;">&lt;/p&gt;</span>
+
+  <span style="color: #94a3b8;">&lt;!-- 👇 THEY ADDED THIS (provided by you) --&gt;</span>
+  <span style="color: #60a5fa;">&lt;script</span> <span style="color: #34d399;">src="https://tintbot.ai/embed.js"</span><span style="color: #60a5fa;">&gt;&lt;/script&gt;</span>
+  <span style="color: #60a5fa;">&lt;script&gt;</span>
+    Tintbot.init({ shopId: <span style="color: #34d399;">'SHOP_ABC123'</span> });
+  <span style="color: #60a5fa;">&lt;/script&gt;</span>
+  <span style="color: #94a3b8;">&lt;!-- ☝️ END OF WHAT THEY ADDED --&gt;</span>
+
+<span style="color: #60a5fa;">&lt;/body&gt;</span>
+<span style="color: #60a5fa;">&lt;/html&gt;</span></pre>
+                </div>
+            </div>
+
+            <div class="success">
+                <h3>✅ Step 3: It Just Works!</h3>
+                <p><strong>That's ALL they did!</strong> The chatbot now appears on their site automatically.</p>
+                <ul>
+                    <li>Chat bubble appears in bottom-right corner</li>
+                    <li>Answers questions about their tint services</li>
+                    <li>Gives instant quotes using their pricing</li>
+                    <li>Books appointments to their calendar</li>
+                    <li>Sends them leads via email/SMS</li>
+                </ul>
+            </div>
+
+            <hr style="margin: 40px 0;">
+
+            <h2>🔧 How YOU Control It (Behind The Scenes)</h2>
+
+            <div class="step">
+                <h3>Your Tintbot.ai Dashboard</h3>
+                <p>When <code>Tintbot.init({ shopId: 'SHOP_ABC123' })</code> runs, it calls YOUR server:</p>
+
+                <div class="code-box">
+<pre><span style="color: #94a3b8;">// What happens automatically when their page loads:</span>
+
+1. Their website loads <span style="color: #34d399;">"https://tintbot.ai/embed.js"</span>
+
+2. Script makes API call to YOUR server:
+   <span style="color: #60a5fa;">GET</span> https://api.tintbot.ai/shops/<span class="highlight">SHOP_ABC123</span>/config
+
+3. YOUR server responds with shop settings:
+   {
+     shopName: <span style="color: #34d399;">"Premium Tint Shop"</span>,
+     primaryColor: <span style="color: #34d399;">"#2563eb"</span>,
+     logo: <span style="color: #34d399;">"https://premiumtint.com/logo.png"</span>,
+     pricing: {
+       sedan: { ceramic: <span style="color: #fbbf24;">539</span>, carbon: <span style="color: #fbbf24;">385</span>, dyed: <span style="color: #fbbf24;">270</span> },
+       suv: { ceramic: <span style="color: #fbbf24;">689</span>, carbon: <span style="color: #fbbf24;">490</span>, dyed: <span style="color: #fbbf24;">350</span> }
+     },
+     calendar: <span style="color: #34d399;">"premium-tint@gmail.com"</span>,
+     phone: <span style="color: #34d399;">"+1-555-123-4567"</span>,
+     email: <span style="color: #34d399;">"shop@premiumtint.com"</span>
+   }
+
+4. Chatbot appears on their site with THEIR branding and pricing!
+</pre>
+                </div>
+            </div>
+
+            <hr style="margin: 40px 0;">
+
+            <h2>📱 What The Customer Sees</h2>
+
+            <div style="position: relative; height: 500px; border: 2px solid #e2e8f0; border-radius: 8px; background: #f9fafb; margin: 20px 0;">
+                <!-- Simulated website -->
+                <div style="background: #2563eb; color: white; padding: 20px; text-align: center;">
+                    <h2 style="margin: 0;">🚗 Premium Tint Shop</h2>
+                    <p style="margin: 5px 0;">Professional Window Tinting Services</p>
+                </div>
+
+                <div style="padding: 30px;">
+                    <h3>Welcome to Our Shop!</h3>
+                    <p>We offer premium window tinting services for all vehicles...</p>
+                    <div style="background: #e2e8f0; height: 100px; margin: 20px 0; border-radius: 4px;"></div>
+                    <div style="background: #e2e8f0; height: 80px; margin: 20px 0; border-radius: 4px;"></div>
+                </div>
+
+                <!-- Chat bubble (bottom right) -->
+                <div style="position: absolute; bottom: 20px; right: 20px;">
+                    <!-- Pulse ring -->
+                    <div style="position: absolute; inset: 0; width: 64px; height: 64px; background: #3b82f6; border-radius: 50%; animation: pulse 2s infinite; opacity: 0.6;"></div>
+
+                    <!-- Chat button -->
+                    <div style="position: relative; width: 64px; height: 64px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); cursor: pointer;">
+                        <svg style="width: 32px; height: 32px; color: white;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                        </svg>
+                        <span style="position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 10px;">AI</span>
+                    </div>
+                </div>
+
+                <!-- Chat preview message -->
+                <div style="position: absolute; bottom: 100px; right: 20px; background: white; border: 2px solid #3b82f6; border-radius: 12px; padding: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-width: 250px; animation: bounce 2s infinite;">
+                    <p style="margin: 0; font-size: 14px;">👋 Need a quote? I can help in 30 seconds!</p>
+                </div>
+            </div>
+
+            <style>
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.5; transform: scale(1.1); }
+                }
+                @keyframes bounce {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-5px); }
+                }
+            </style>
+
+            <hr style="margin: 40px 0;">
+
+            <h2>💰 Pricing Models For Your Customers</h2>
+
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                <thead>
+                    <tr style="background: #f1f5f9;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e2e8f0;">Service Level</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e2e8f0;">What Shop Owner Does</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e2e8f0;">What You Charge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>DIY Install</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">They paste the code themselves</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>$0</strong> (included in monthly)</td>
+                    </tr>
+                    <tr style="background: #f9fafb;">
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>Assisted Setup</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">You guide them on a call (30 min)</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>$297</strong> one-time</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>White Glove</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">You do everything for them</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;"><strong>$997</strong> one-time</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="success">
+                <h3>💡 Pro Tip</h3>
+                <p><strong>Most shops will choose "Assisted Setup" ($297)</strong></p>
+                <p>That's $297 × 20 shops = <strong>$5,940 in setup fees</strong></p>
+                <p>PLUS $297-497/month recurring = <strong>$71,280-119,280/year</strong> from 20 shops!</p>
+            </div>
+
+            <hr style="margin: 40px 0;">
+
+            <h2>🔐 Why This Works (Your Competitive Advantage)</h2>
+
+            <div class="step">
+                <h3>✅ Super Simple For Customers</h3>
+                <p>Just 5 lines of code. Any shop owner (or their web person) can do it in 2 minutes.</p>
+            </div>
+
+            <div class="step">
+                <h3>✅ YOU Control Everything</h3>
+                <p>The chatbot code lives on YOUR servers. You can:</p>
+                <ul>
+                    <li>Update features for all shops instantly</li>
+                    <li>Add new capabilities without shops doing anything</li>
+                    <li>Track analytics across all shops</li>
+                    <li>Turn off service if they don't pay</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h3>✅ Works On ANY Website</h3>
+                <p>WordPress, Shopify, Wix, custom HTML - doesn't matter! The embed code works everywhere.</p>
+            </div>
+
+            <div class="step">
+                <h3>✅ No Maintenance For Them</h3>
+                <p>Updates happen automatically. They never touch the code again after installing.</p>
+            </div>
+
+            <div class="step">
+                <h3>✅ Branded To Their Shop</h3>
+                <p>Even though it's YOUR technology, it looks like THEIR chatbot (their colors, logo, business name).</p>
+            </div>
+
+            <hr style="margin: 40px 0;">
+
+            <h2>📋 Customer Onboarding Process</h2>
+
+            <ol style="line-height: 2;">
+                <li><strong>Shop signs up</strong> → You create their account with shopId: "SHOP_ABC123"</li>
+                <li><strong>You collect info</strong> → Business name, logo, pricing, calendar, phone</li>
+                <li><strong>You configure dashboard</strong> → Enter their settings in your system</li>
+                <li><strong>You send them embed code</strong> → Email with their unique 5-line snippet</li>
+                <li><strong>They paste it</strong> → Either DIY, assisted, or you do it</li>
+                <li><strong>It works!</strong> → Chatbot appears on their site instantly</li>
+                <li><strong>They get leads</strong> → You send them notifications, they book appointments</li>
+                <li><strong>They pay you monthly</strong> → $297-497/month recurring forever 💰</li>
+            </ol>
+
+            <div class="success">
+                <h3>🎉 That's It!</h3>
+                <p>Your customers get a high-tech AI chatbot on their site without any complexity.</p>
+                <p>You get recurring revenue and full control of the technology.</p>
+                <p><strong>Win-win!</strong></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

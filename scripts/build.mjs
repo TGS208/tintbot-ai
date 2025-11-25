@@ -62,8 +62,18 @@ try {
     copyDirectory('public', 'dist/public')
   }
 
+  console.log('✅ Copying components (chatbot scripts) to dist/components/')
+  if (existsSync('components')) {
+    copyDirectory('components', 'dist/components')
+  }
+
+  console.log('✅ Copying chat-welcome.html to dist/')
+  if (existsSync('chat-welcome.html')) {
+    copyFileSync('chat-welcome.html', 'dist/chat-welcome.html')
+  }
+
   console.log('✅ Build complete! Your static HTML site is ready.')
-  console.log('📁 Output: dist/index.html, dist/public/hero-tintbot.jpg')
+  console.log('📁 Output: dist/index.html, dist/components/chat-overlay.js, dist/chat-welcome.html')
 
 } catch (error) {
   console.error('❌ Build failed:', error.message)
