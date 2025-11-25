@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Tintbot.ai - Your AI Tint Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f172a, #312e81, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-message {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .typing-indicator span {
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .welcome-overlay {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .option-button {
+            transition: all 0.2s ease;
+        }
+
+        .option-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .chat-container {
+            height: calc(100vh - 200px);
+            max-height: 600px;
+        }
+
+        .message-bubble {
+            max-width: 85%;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                height: calc(100vh - 250px);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Welcome Chat Interface -->
+    <div id="welcomeOverlay" class="welcome-overlay w-full max-w-4xl">
+        <!-- Header -->
+        <div class="glass rounded-t-2xl p-6 border-b border-white/10">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-2xl"></i>
+                        </div>
+                        <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-slate-900 pulse-ring"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Tintbot AI Assistant</h1>
+                        <p class="text-sm text-gray-400">
+                            <i class="fas fa-circle text-green-500 text-xs mr-1"></i>
+                            Online • Typically replies instantly
+                        </p>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2 text-sm text-gray-400">
+                    <i class="fas fa-shield-alt text-blue-400"></i>
+                    <span>Secure & Private</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div class="glass p-6">
+            <div id="chatMessages" class="chat-container overflow-y-auto space-y-4 mb-6 pr-2">
+                <!-- Initial AI Message -->
+                <div class="chat-message flex items-start space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <div class="message-bubble">
+                        <div class="bg-blue-600/20 backdrop-blur-sm rounded-2xl rounded-tl-none p-4 border border-blue-500/30">
+                            <p class="text-white mb-3">
+                                👋 Welcome! I'm your AI tint assistant. I can help you:
+                            </p>
+                            <ul class="text-gray-300 text-sm space-y-2 mb-3">
+                                <li>✨ Get an instant quote (with AI vehicle recognition)</li>
+                                <li>📊 Compare tint options (Ceramic, Carbon, Dyed)</li>
+                                <li>📅 Book an appointment</li>
+                                <li>❓ Answer your tint questions</li>
+                            </ul>
+                            <p class="text-white font-semibold">What brings you here today?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Option Buttons -->
+                <div id="quickOptions" class="flex flex-col space-y-3 ml-13">
+                    <button onclick="selectOption('quote')" class="option-button glass hover:bg-blue-600/20 text-white p-4 rounded-xl text-left border border-blue-500/30 transition">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-600/30 rounded-full flex items-center justify-center">
+                                <i class="fas fa-calculator text-blue-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold">Get Instant Quote</p>
+                                <p class="text-sm text-gray-400">Upload photo or VIN - 30 seconds</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-blue-400"></i>
+                        </div>
+                    </button>
+
+                    <button onclick="selectOption('compare')" class="option-button glass hover:bg-purple-600/20 text-white p-4 rounded-xl text-left border border-purple-500/30 transition">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-purple-600/30 rounded-full flex items-center justify-center">
+                                <i class="fas fa-balance-scale text-purple-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold">Compare Tint Options</p>
+                                <p class="text-sm text-gray-400">See differences between tint types</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-purple-400"></i>
+                        </div>
+                    </button>
+
+                    <button onclick="selectOption('question')" class="option-button glass hover:bg-green-600/20 text-white p-4 rounded-xl text-left border border-green-500/30 transition">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-green-600/30 rounded-full flex items-center justify-center">
+                                <i class="fas fa-question-circle text-green-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold">I Have Questions</p>
+                                <p class="text-sm text-gray-400">Ask me anything about tinting</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-green-400"></i>
+                        </div>
+                    </button>
+
+                    <button onclick="selectOption('browse')" class="option-button glass hover:bg-orange-600/20 text-white p-4 rounded-xl text-left border border-orange-500/30 transition">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-orange-600/30 rounded-full flex items-center justify-center">
+                                <i class="fas fa-compass text-orange-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-semibold">Just Browsing</p>
+                                <p class="text-sm text-gray-400">Explore our services</p>
+                            </div>
+                            <i class="fas fa-arrow-right text-orange-400"></i>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Typing Indicator (Hidden by default) -->
+                <div id="typingIndicator" class="hidden chat-message flex items-start space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <div class="bg-blue-600/20 backdrop-blur-sm rounded-2xl rounded-tl-none p-4 border border-blue-500/30">
+                        <div class="typing-indicator flex space-x-1">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input (Hidden initially) -->
+            <div id="chatInputContainer" class="hidden">
+                <div class="flex space-x-3">
+                    <input
+                        type="text"
+                        id="chatInput"
+                        placeholder="Type your message..."
+                        class="chat-input flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400"
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button onclick="sendMessage()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 text-center">
+                    <i class="fas fa-lock mr-1"></i>
+                    Your conversation is private and secure
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="glass rounded-b-2xl p-4 border-t border-white/10">
+            <div class="flex items-center justify-between text-sm text-gray-400">
+                <div class="flex items-center space-x-4">
+                    <span><i class="fas fa-bolt text-yellow-400 mr-1"></i> Powered by AI</span>
+                    <span class="hidden md:inline"><i class="fas fa-shield-check text-green-400 mr-1"></i> GDPR Compliant</span>
+                </div>
+                <div>
+                    <button onclick="minimizeChat()" class="text-gray-400 hover:text-white transition">
+                        <i class="fas fa-minus-circle mr-1"></i> Minimize
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimized Chat Button (Hidden initially) -->
+    <div id="minimizedChat" class="hidden fixed bottom-6 right-6 z-50">
+        <button onclick="restoreChat()" class="relative bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-full w-16 h-16 shadow-2xl hover:scale-110 transition-transform">
+            <i class="fas fa-comment-dots text-2xl"></i>
+            <span class="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold">
+                1
+            </span>
+        </button>
+    </div>
+
+    <script>
+        let conversationHistory = [];
+        let leadData = {
+            vehicle: null,
+            intent: null,
+            name: null,
+            email: null,
+            phone: null,
+            leadScore: 0
+        };
+
+        // Conversation flows based on user selection
+        const conversationFlows = {
+            quote: [
+                {
+                    bot: "Perfect! I'll help you get an instant quote. I have three ways to identify your vehicle:",
+                    options: [
+                        { text: "📸 Upload a photo of my car", action: "photoQuote" },
+                        { text: "🔢 Enter my VIN number", action: "vinQuote" },
+                        { text: "✍️ Type my car details", action: "manualQuote" }
+                    ]
+                }
+            ],
+            compare: [
+                {
+                    bot: "Great question! We offer three types of window tint. Let me break down the differences:",
+                    message: `
+                        <div class="space-y-4 mt-4">
+                            <div class="bg-slate-800/50 rounded-lg p-4">
+                                <h3 class="font-bold text-blue-400 mb-2">💎 Ceramic Tint - Premium</h3>
+                                <ul class="text-sm space-y-1 text-gray-300">
+                                    <li>• 65% heat rejection (best in class)</li>
+                                    <li>• 99.9% UV protection</li>
+                                    <li>• Lifetime warranty</li>
+                                    <li>• No signal interference</li>
+                                    <li>• Best for: Tesla, BMW, luxury vehicles</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg p-4">
+                                <h3 class="font-bold text-green-400 mb-2">⭐ Carbon Tint - Best Value</h3>
+                                <ul class="text-sm space-y-1 text-gray-300">
+                                    <li>• 45% heat rejection</li>
+                                    <li>• 99% UV protection</li>
+                                    <li>• 5-year warranty</li>
+                                    <li>• Won't fade or turn purple</li>
+                                    <li>• Best for: Most daily drivers</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg p-4">
+                                <h3 class="font-bold text-orange-400 mb-2">💰 Dyed Tint - Budget</h3>
+                                <ul class="text-sm space-y-1 text-gray-300">
+                                    <li>• 30% heat rejection</li>
+                                    <li>• 99% UV protection</li>
+                                    <li>• 2-year warranty</li>
+                                    <li>• Great for privacy</li>
+                                    <li>• Best for: Budget-conscious customers</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-400">💡 Most customers choose Carbon for the best balance of performance and price.</p>
+                    `,
+                    followUp: "Would you like to get a quote for your vehicle?"
+                }
+            ],
+            question: [
+                {
+                    bot: "I'm here to help! What would you like to know about window tinting?",
+                    showInput: true,
+                    aiAssist: true
+                }
+            ],
+            browse: [
+                {
+                    bot: "No problem! I'll let you explore. But before I minimize, quick question - what type of vehicle do you have? This helps me show you relevant examples.",
+                    showInput: true,
+                    onComplete: "allowBrowse"
+                }
+            ]
+        };
+
+        // Handle option selection
+        function selectOption(option) {
+            leadData.intent = option;
+            leadData.leadScore += 10;
+
+            // Hide quick options
+            document.getElementById('quickOptions').style.display = 'none';
+
+            // Add user selection as message
+            addUserMessage(getOptionText(option));
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Load conversation flow
+            setTimeout(() => {
+                hideTypingIndicator();
+                loadConversationFlow(option);
+            }, 1500);
+        }
+
+        function getOptionText(option) {
+            const texts = {
+                quote: "I want to get an instant quote",
+                compare: "I want to compare tint options",
+                question: "I have some questions",
+                browse: "Just browsing for now"
+            };
+            return texts[option] || option;
+        }
+
+        function loadConversationFlow(flowKey) {
+            const flow = conversationFlows[flowKey];
+            if (!flow || flow.length === 0) return;
+
+            const step = flow[0];
+
+            // Add bot message
+            if (step.bot) {
+                addBotMessage(step.bot);
+            }
+
+            // Add formatted message if exists
+            if (step.message) {
+                setTimeout(() => addBotHTMLMessage(step.message), 300);
+            }
+
+            // Add follow-up if exists
+            if (step.followUp) {
+                setTimeout(() => {
+                    addBotMessage(step.followUp);
+                    showOptionsButtons([
+                        { text: "Yes, get quote", action: "quote" },
+                        { text: "No, just browsing", action: "browse" }
+                    ]);
+                }, step.message ? 600 : 300);
+            }
+
+            // Show options if exists
+            if (step.options) {
+                setTimeout(() => showOptionsButtons(step.options), 300);
+            }
+
+            // Show input if needed
+            if (step.showInput) {
+                setTimeout(() => {
+                    document.getElementById('chatInputContainer').classList.remove('hidden');
+                    document.getElementById('chatInput').focus();
+                }, 300);
+            }
+
+            // Handle special actions
+            if (step.onComplete === 'allowBrowse') {
+                setTimeout(() => {
+                    addBotMessage("Great! Feel free to explore. I'll be here in the corner if you need me. Click the chat icon anytime! 👋");
+                    setTimeout(() => minimizeChat(), 2000);
+                }, 2000);
+            }
+        }
+
+        function showOptionsButtons(options) {
+            const container = document.createElement('div');
+            container.className = 'flex flex-col space-y-2 ml-13';
+            container.id = 'dynamicOptions';
+
+            options.forEach(opt => {
+                const button = document.createElement('button');
+                button.className = 'option-button glass hover:bg-blue-600/20 text-white px-4 py-3 rounded-xl text-left border border-blue-500/30 transition text-sm';
+                button.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span>${opt.text}</span>
+                        <i class="fas fa-arrow-right text-blue-400 text-xs"></i>
+                    </div>
+                `;
+                button.onclick = () => handleOptionClick(opt);
+                container.appendChild(button);
+            });
+
+            document.getElementById('chatMessages').appendChild(container);
+            scrollToBottom();
+        }
+
+        function handleOptionClick(option) {
+            // Remove option buttons
+            const dynamicOptions = document.getElementById('dynamicOptions');
+            if (dynamicOptions) {
+                dynamicOptions.remove();
+            }
+
+            // Add user selection
+            addUserMessage(option.text);
+
+            // Handle action
+            if (option.action === 'photoQuote') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addBotMessage("Perfect! I'm redirecting you to our AI vehicle recognition system. Just upload a photo and you'll get instant pricing!");
+                    setTimeout(() => {
+                        window.location.href = '/quote.html?method=photo';
+                    }, 1500);
+                }, 1000);
+            } else if (option.action === 'vinQuote') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addBotMessage("Great choice! VIN gives us 100% accurate vehicle data. Redirecting you now...");
+                    setTimeout(() => {
+                        window.location.href = '/quote.html?method=vin';
+                    }, 1500);
+                }, 1000);
+            } else if (option.action === 'manualQuote') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addBotMessage("No problem! You can enter your vehicle details manually. Taking you there now...");
+                    setTimeout(() => {
+                        window.location.href = '/quote.html?method=manual';
+                    }, 1500);
+                }, 1000);
+            } else if (option.action === 'quote') {
+                selectOption('quote');
+            } else if (option.action === 'browse') {
+                selectOption('browse');
+            }
+        }
+
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message flex items-start space-x-3 justify-end';
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <div class="bg-blue-600 rounded-2xl rounded-tr-none p-4">
+                        <p class="text-white">${escapeHtml(text)}</p>
+                    </div>
+                </div>
+                <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-user text-white"></i>
+                </div>
+            `;
+            document.getElementById('chatMessages').appendChild(messageDiv);
+            scrollToBottom();
+
+            conversationHistory.push({ role: 'user', content: text });
+        }
+
+        function addBotMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message flex items-start space-x-3';
+            messageDiv.innerHTML = `
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div class="message-bubble">
+                    <div class="bg-blue-600/20 backdrop-blur-sm rounded-2xl rounded-tl-none p-4 border border-blue-500/30">
+                        <p class="text-white">${escapeHtml(text)}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('chatMessages').appendChild(messageDiv);
+            scrollToBottom();
+
+            conversationHistory.push({ role: 'assistant', content: text });
+        }
+
+        function addBotHTMLMessage(html) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message flex items-start space-x-3';
+            messageDiv.innerHTML = `
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-white"></i>
+                </div>
+                <div class="message-bubble">
+                    <div class="bg-blue-600/20 backdrop-blur-sm rounded-2xl rounded-tl-none p-4 border border-blue-500/30">
+                        ${html}
+                    </div>
+                </div>
+            `;
+            document.getElementById('chatMessages').appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').classList.remove('hidden');
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').classList.add('hidden');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addUserMessage(message);
+            input.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            // Simulate AI response (would connect to your backend)
+            setTimeout(() => {
+                hideTypingIndicator();
+                handleAIResponse(message);
+            }, 1500);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function handleAIResponse(userMessage) {
+            // Simple keyword-based responses (you'd replace this with actual AI)
+            const lowerMessage = userMessage.toLowerCase();
+
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('quote')) {
+                addBotMessage("I can get you an instant quote! Would you like to upload a photo of your car, enter your VIN, or type your vehicle details?");
+                showOptionsButtons([
+                    { text: "📸 Upload photo", action: "photoQuote" },
+                    { text: "🔢 Enter VIN", action: "vinQuote" },
+                    { text: "✍️ Type details", action: "manualQuote" }
+                ]);
+            } else if (lowerMessage.includes('ceramic') || lowerMessage.includes('carbon') || lowerMessage.includes('dyed')) {
+                selectOption('compare');
+            } else if (lowerMessage.includes('appointment') || lowerMessage.includes('book') || lowerMessage.includes('schedule')) {
+                addBotMessage("I can help you book an appointment! First, let me get you a quick quote so we know which tint you want. Sound good?");
+                setTimeout(() => selectOption('quote'), 1000);
+            } else {
+                // Generic helpful response
+                addBotMessage("That's a great question! Here's what I can help you with:");
+                showOptionsButtons([
+                    { text: "Get instant quote", action: "quote" },
+                    { text: "Compare tint types", action: "compare" },
+                    { text: "Talk to a human", action: "contact" }
+                ]);
+            }
+        }
+
+        function minimizeChat() {
+            document.getElementById('welcomeOverlay').classList.add('hidden');
+            document.getElementById('minimizedChat').classList.remove('hidden');
+
+            // Store that user has interacted
+            sessionStorage.setItem('chatMinimized', 'true');
+        }
+
+        function restoreChat() {
+            document.getElementById('minimizedChat').classList.add('hidden');
+            document.getElementById('welcomeOverlay').classList.remove('hidden');
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Check if user has already interacted
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('chatMinimized') === 'true') {
+                // User has seen chat before, show minimized
+                minimizeChat();
+            }
+        });
+
+        // Track user engagement for analytics
+        function trackEngagement(action, data = {}) {
+            console.log('Engagement:', action, data);
+            // Send to your analytics platform
+            // Example: gtag('event', action, data);
+        }
+
+        // Track when user selects an option
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.option-button')) {
+                trackEngagement('chat_option_clicked', {
+                    option: e.target.textContent.trim()
+                });
+            }
+        });
+    </script>
+</body>
+</html>
