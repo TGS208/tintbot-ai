@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Quote - Tintbot.ai | AI-Powered Window Tint Quotes</title>
+    <meta name="description" content="Get an instant window tint quote using our AI-powered vehicle recognition technology. Upload a photo or VIN for accurate pricing.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e3a8a, #0f172a, #312e81, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .upload-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .upload-zone:hover {
+            border-color: rgba(59, 130, 246, 0.6);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .upload-zone.dragover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            transform: scale(1.02);
+        }
+
+        .option-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .option-card.selected {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .analyzing {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .price-card {
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.3);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-car text-blue-400 text-2xl"></i>
+                    <span class="text-2xl font-bold">Tintbot.ai</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-400 transition">Home</a>
+                    <a href="features.html" class="hover:text-blue-400 transition">Features</a>
+                    <a href="demo.html" class="hover:text-blue-400 transition">Demo</a>
+                    <a href="pricing.html" class="hover:text-blue-400 transition">Pricing</a>
+                    <a href="quote.html" class="text-blue-400 font-semibold">Get Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-24">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Get Your Instant Quote
+            </h1>
+            <p class="text-xl text-gray-300">
+                <i class="fas fa-magic text-yellow-400"></i> AI-Powered Vehicle Recognition
+            </p>
+            <p class="text-sm text-gray-400 mt-2">
+                Upload a photo, scan VIN, or enter manually for instant pricing
+            </p>
+        </div>
+
+        <!-- Method Selection -->
+        <div id="methodSelection" class="max-w-5xl mx-auto mb-12">
+            <h2 class="text-2xl font-semibold mb-6 text-center">How would you like to identify your vehicle?</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Photo Upload -->
+                <div class="option-card glass-card rounded-xl p-6 text-center" onclick="selectMethod('photo')">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-camera text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Upload Photo</h3>
+                    <p class="text-gray-400 text-sm">
+                        Take or upload a photo of your car
+                    </p>
+                    <p class="text-green-400 text-xs mt-2">
+                        <i class="fas fa-brain"></i> AI Vision Recognition
+                    </p>
+                </div>
+
+                <!-- VIN Scan -->
+                <div class="option-card glass-card rounded-xl p-6 text-center" onclick="selectMethod('vin')">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-barcode text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Scan VIN</h3>
+                    <p class="text-gray-400 text-sm">
+                        Photo of VIN sticker or enter manually
+                    </p>
+                    <p class="text-green-400 text-xs mt-2">
+                        <i class="fas fa-check-circle"></i> 100% Accurate
+                    </p>
+                </div>
+
+                <!-- Manual Entry -->
+                <div class="option-card glass-card rounded-xl p-6 text-center" onclick="selectMethod('manual')">
+                    <div class="text-5xl mb-4">
+                        <i class="fas fa-keyboard text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Manual Entry</h3>
+                    <p class="text-gray-400 text-sm">
+                        Type year, make, and model
+                    </p>
+                    <p class="text-green-400 text-xs mt-2">
+                        <i class="fas fa-bolt"></i> Quick & Simple
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Upload Section -->
+        <div id="photoSection" class="hidden max-w-3xl mx-auto">
+            <div class="glass-card rounded-xl p-8">
+                <h3 class="text-2xl font-semibold mb-6 text-center">
+                    <i class="fas fa-camera text-blue-400"></i> Upload Vehicle Photo
+                </h3>
+
+                <div id="uploadZone" class="upload-zone rounded-xl p-12 text-center mb-6">
+                    <input type="file" id="photoInput" accept="image/*" capture="environment" class="hidden">
+                    <div id="uploadPrompt">
+                        <i class="fas fa-cloud-upload-alt text-6xl text-blue-400 mb-4"></i>
+                        <p class="text-xl mb-2">Click to upload or drag & drop</p>
+                        <p class="text-gray-400 text-sm">Take a photo of your vehicle</p>
+                        <button onclick="document.getElementById('photoInput').click()"
+                                class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                            <i class="fas fa-camera mr-2"></i> Choose Photo
+                        </button>
+                    </div>
+                    <div id="previewContainer" class="hidden">
+                        <img id="imagePreview" class="max-w-full rounded-lg mb-4" alt="Vehicle preview">
+                        <button onclick="analyzePhoto()"
+                                class="px-8 py-3 bg-green-600 hover:bg-green-700 rounded-lg transition font-semibold">
+                            <i class="fas fa-magic mr-2"></i> Analyze Vehicle
+                        </button>
+                    </div>
+                </div>
+
+                <div id="analyzingIndicator" class="hidden text-center">
+                    <div class="analyzing">
+                        <i class="fas fa-brain text-6xl text-purple-400 mb-4"></i>
+                    </div>
+                    <p class="text-xl">AI is analyzing your vehicle...</p>
+                    <p class="text-gray-400 text-sm mt-2">This usually takes 3-5 seconds</p>
+                </div>
+
+                <button onclick="selectMethod(null)" class="text-gray-400 hover:text-white transition mt-4">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to options
+                </button>
+            </div>
+        </div>
+
+        <!-- VIN Section -->
+        <div id="vinSection" class="hidden max-w-3xl mx-auto">
+            <div class="glass-card rounded-xl p-8">
+                <h3 class="text-2xl font-semibold mb-6 text-center">
+                    <i class="fas fa-barcode text-purple-400"></i> Enter VIN
+                </h3>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold mb-2">VIN Number (17 characters)</label>
+                    <input type="text" id="vinInput" maxlength="17"
+                           placeholder="1HGBH41JXMN109186"
+                           class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white uppercase placeholder-gray-500 focus:border-blue-400 focus:outline-none">
+                    <p class="text-xs text-gray-400 mt-2">
+                        <i class="fas fa-info-circle"></i> Find your VIN on the driver's side door jamb or dashboard
+                    </p>
+                </div>
+
+                <div class="text-center mb-6">
+                    <p class="text-gray-400 mb-4">OR</p>
+                    <button onclick="document.getElementById('vinPhotoInput').click()"
+                            class="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition">
+                        <i class="fas fa-camera mr-2"></i> Take Photo of VIN Sticker
+                    </button>
+                    <input type="file" id="vinPhotoInput" accept="image/*" capture="environment" class="hidden">
+                </div>
+
+                <button onclick="decodeVIN()"
+                        class="w-full px-8 py-4 bg-green-600 hover:bg-green-700 rounded-lg transition font-semibold text-lg">
+                    <i class="fas fa-search mr-2"></i> Decode VIN & Get Quote
+                </button>
+
+                <button onclick="selectMethod(null)" class="text-gray-400 hover:text-white transition mt-4">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to options
+                </button>
+            </div>
+        </div>
+
+        <!-- Manual Entry Section -->
+        <div id="manualSection" class="hidden max-w-3xl mx-auto">
+            <div class="glass-card rounded-xl p-8">
+                <h3 class="text-2xl font-semibold mb-6 text-center">
+                    <i class="fas fa-keyboard text-green-400"></i> Enter Vehicle Details
+                </h3>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Year</label>
+                        <input type="number" id="yearInput" placeholder="2022" min="1980" max="2025"
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-blue-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Make</label>
+                        <input type="text" id="makeInput" placeholder="Tesla"
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-blue-400 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Model</label>
+                        <input type="text" id="modelInput" placeholder="Model 3"
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:border-blue-400 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold mb-2">Vehicle Type</label>
+                    <select id="typeInput"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:border-blue-400 focus:outline-none">
+                        <option value="sedan">Sedan (4-door car)</option>
+                        <option value="coupe">Coupe (2-door car)</option>
+                        <option value="suv">SUV / Crossover</option>
+                        <option value="truck">Pickup Truck</option>
+                        <option value="van">Van / Minivan</option>
+                    </select>
+                </div>
+
+                <button onclick="generateManualQuote()"
+                        class="w-full px-8 py-4 bg-green-600 hover:bg-green-700 rounded-lg transition font-semibold text-lg">
+                    <i class="fas fa-calculator mr-2"></i> Calculate Quote
+                </button>
+
+                <button onclick="selectMethod(null)" class="text-gray-400 hover:text-white transition mt-4">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to options
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden max-w-6xl mx-auto">
+            <div class="glass-card rounded-xl p-8">
+                <!-- Vehicle Info -->
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-2">Your Instant Quote</h2>
+                    <div id="vehicleInfo" class="text-xl text-gray-300"></div>
+                    <div id="confidenceBadge" class="inline-block mt-2"></div>
+                </div>
+
+                <!-- Pricing Options -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <!-- Dyed Film -->
+                    <div class="price-card glass-card rounded-xl p-6 relative">
+                        <h3 class="text-xl font-semibold mb-2">Dyed Film</h3>
+                        <p class="text-gray-400 text-sm mb-4">Budget-Friendly</p>
+                        <div class="text-4xl font-bold text-blue-400 mb-4">
+                            $<span id="priceDyed">-</span>
+                        </div>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 30% Heat Rejection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 99% UV Protection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 2 Year Warranty</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> Great Privacy</li>
+                        </ul>
+                        <button onclick="bookQuote('dyed')"
+                                class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition">
+                            Select Option
+                        </button>
+                    </div>
+
+                    <!-- Carbon Film -->
+                    <div class="price-card glass-card rounded-xl p-6 relative border-2 border-green-500">
+                        <div class="recommended-badge">
+                            <i class="fas fa-star mr-1"></i> BEST VALUE
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Carbon Film</h3>
+                        <p class="text-gray-400 text-sm mb-4">Most Popular</p>
+                        <div class="text-4xl font-bold text-green-400 mb-4">
+                            $<span id="priceCarbon">-</span>
+                        </div>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 45% Heat Rejection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 99% UV Protection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 5 Year Warranty</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> No Fading</li>
+                        </ul>
+                        <button onclick="bookQuote('carbon')"
+                                class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition font-semibold">
+                            Select Option
+                        </button>
+                    </div>
+
+                    <!-- Ceramic Film -->
+                    <div class="price-card glass-card rounded-xl p-6 relative">
+                        <h3 class="text-xl font-semibold mb-2">Ceramic Film</h3>
+                        <p class="text-gray-400 text-sm mb-4">Premium Quality</p>
+                        <div class="text-4xl font-bold text-purple-400 mb-4">
+                            $<span id="priceCeramic">-</span>
+                        </div>
+                        <ul class="space-y-2 text-sm mb-6">
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 65% Heat Rejection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> 99.9% UV Protection</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> Lifetime Warranty</li>
+                            <li><i class="fas fa-check text-green-400 mr-2"></i> Maximum Clarity</li>
+                        </ul>
+                        <button onclick="bookQuote('ceramic')"
+                                class="w-full px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition">
+                            Select Option
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="grid md:grid-cols-3 gap-4 text-center text-sm">
+                    <div class="glass-card rounded-lg p-4">
+                        <i class="fas fa-window-maximize text-2xl text-blue-400 mb-2"></i>
+                        <p class="text-gray-400">Windows</p>
+                        <p class="text-xl font-semibold" id="windowCount">-</p>
+                    </div>
+                    <div class="glass-card rounded-lg p-4">
+                        <i class="fas fa-clock text-2xl text-purple-400 mb-2"></i>
+                        <p class="text-gray-400">Install Time</p>
+                        <p class="text-xl font-semibold" id="installTime">-</p>
+                    </div>
+                    <div class="glass-card rounded-lg p-4">
+                        <i class="fas fa-ruler-combined text-2xl text-green-400 mb-2"></i>
+                        <p class="text-gray-400">Surface Area</p>
+                        <p class="text-xl font-semibold" id="surfaceArea">-</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="startOver()"
+                            class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition">
+                        <i class="fas fa-redo mr-2"></i> Get Another Quote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMethod = null;
+        let currentImage = null;
+
+        // Method Selection
+        function selectMethod(method) {
+            currentMethod = method;
+
+            // Hide all sections
+            document.getElementById('methodSelection').classList.toggle('hidden', method !== null);
+            document.getElementById('photoSection').classList.toggle('hidden', method !== 'photo');
+            document.getElementById('vinSection').classList.toggle('hidden', method !== 'vin');
+            document.getElementById('manualSection').classList.toggle('hidden', method !== 'manual');
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+
+        // Photo Upload Handling
+        const uploadZone = document.getElementById('uploadZone');
+        const photoInput = document.getElementById('photoInput');
+        const imagePreview = document.getElementById('imagePreview');
+
+        photoInput.addEventListener('change', handlePhotoSelect);
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                processImage(file);
+            }
+        });
+
+        function handlePhotoSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                processImage(file);
+            }
+        }
+
+        function processImage(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentImage = e.target.result;
+                imagePreview.src = currentImage;
+                document.getElementById('uploadPrompt').classList.add('hidden');
+                document.getElementById('previewContainer').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Analyze Photo
+        async function analyzePhoto() {
+            if (!currentImage) return;
+
+            document.getElementById('previewContainer').classList.add('hidden');
+            document.getElementById('analyzingIndicator').classList.remove('hidden');
+
+            try {
+                const response = await fetch('/.netlify/functions/vehicle-vision', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: currentImage })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.vehicle, data.quote);
+                } else {
+                    alert('Failed to analyze vehicle: ' + data.message);
+                    document.getElementById('analyzingIndicator').classList.add('hidden');
+                    document.getElementById('previewContainer').classList.remove('hidden');
+                }
+            } catch (error) {
+                alert('Error analyzing vehicle: ' + error.message);
+                document.getElementById('analyzingIndicator').classList.add('hidden');
+                document.getElementById('previewContainer').classList.remove('hidden');
+            }
+        }
+
+        // VIN Decode
+        document.getElementById('vinPhotoInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                try {
+                    const response = await fetch('/.netlify/functions/vin-decoder', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ image: event.target.result })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        document.getElementById('vinInput').value = data.vin;
+                        displayResults(data.vehicle, data.quote);
+                    } else {
+                        alert('Could not read VIN from image. Please enter manually.');
+                    }
+                } catch (error) {
+                    alert('Error reading VIN: ' + error.message);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+
+        async function decodeVIN() {
+            const vin = document.getElementById('vinInput').value.trim();
+
+            if (vin.length !== 17) {
+                alert('VIN must be exactly 17 characters');
+                return;
+            }
+
+            try {
+                const response = await fetch('/.netlify/functions/vin-decoder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ vin })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayResults(data.vehicle, data.quote);
+                } else {
+                    alert('Failed to decode VIN: ' + data.message);
+                }
+            } catch (error) {
+                alert('Error decoding VIN: ' + error.message);
+            }
+        }
+
+        // Manual Quote
+        function generateManualQuote() {
+            const year = document.getElementById('yearInput').value;
+            const make = document.getElementById('makeInput').value.trim();
+            const model = document.getElementById('modelInput').value.trim();
+            const type = document.getElementById('typeInput').value;
+
+            if (!year || !make || !model) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate quote locally
+            const vehicle = {
+                year,
+                make,
+                model,
+                category: type,
+                confidence: 1.0
+            };
+
+            const quote = calculateLocalQuote(type, make);
+
+            displayResults(vehicle, quote);
+        }
+
+        function calculateLocalQuote(category, make) {
+            const basePricing = {
+                coupe: { base: 250, windows: 4, area: 20, time: '2-3 hours' },
+                sedan: { base: 275, windows: 6, area: 25, time: '3-4 hours' },
+                suv: { base: 350, windows: 8, area: 35, time: '4-5 hours' },
+                truck: { base: 300, windows: 6, area: 28, time: '3-4 hours' },
+                van: { base: 400, windows: 10, area: 45, time: '5-6 hours' }
+            };
+
+            const config = basePricing[category] || basePricing.sedan;
+            let basePrice = config.base;
+
+            const premiumMakes = ['tesla', 'bmw', 'mercedes', 'audi', 'lexus', 'porsche'];
+            if (premiumMakes.some(m => make.toLowerCase().includes(m))) {
+                basePrice += 50;
+            }
+
+            return {
+                vehicleCategory: category,
+                windowCount: config.windows,
+                surfaceArea: config.area,
+                estimatedTime: config.time,
+                pricing: {
+                    dyed: { price: Math.round(basePrice * 0.7) },
+                    carbon: { price: basePrice },
+                    ceramic: { price: Math.round(basePrice * 1.4) }
+                }
+            };
+        }
+
+        // Display Results
+        function displayResults(vehicle, quote) {
+            document.getElementById('vehicleInfo').textContent =
+                `${vehicle.year || 'Current'} ${vehicle.make} ${vehicle.model}`;
+
+            if (vehicle.confidence) {
+                const confidencePercent = Math.round(vehicle.confidence * 100);
+                const badge = document.getElementById('confidenceBadge');
+                badge.className = `px-4 py-2 rounded-full text-sm ${
+                    vehicle.confidence > 0.7 ? 'bg-green-600' : 'bg-yellow-600'
+                }`;
+                badge.innerHTML = `<i class="fas fa-check-circle mr-1"></i> ${confidencePercent}% Confidence`;
+            }
+
+            document.getElementById('priceDyed').textContent = quote.pricing.dyed.price;
+            document.getElementById('priceCarbon').textContent = quote.pricing.carbon.price;
+            document.getElementById('priceCeramic').textContent = quote.pricing.ceramic.price;
+
+            document.getElementById('windowCount').textContent = quote.windowCount + ' windows';
+            document.getElementById('installTime').textContent = quote.estimatedTime;
+            document.getElementById('surfaceArea').textContent = quote.surfaceArea + ' sq ft';
+
+            // Hide all method sections and show results
+            document.getElementById('photoSection').classList.add('hidden');
+            document.getElementById('vinSection').classList.add('hidden');
+            document.getElementById('manualSection').classList.add('hidden');
+            document.getElementById('analyzingIndicator').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function bookQuote(tier) {
+            alert(`Great choice! Booking ${tier} tint package. This would redirect to booking page.`);
+            // TODO: Integrate with booking system
+        }
+
+        function startOver() {
+            currentMethod = null;
+            currentImage = null;
+            document.getElementById('photoInput').value = '';
+            document.getElementById('vinInput').value = '';
+            document.getElementById('yearInput').value = '';
+            document.getElementById('makeInput').value = '';
+            document.getElementById('modelInput').value = '';
+            document.getElementById('uploadPrompt').classList.remove('hidden');
+            document.getElementById('previewContainer').classList.add('hidden');
+            selectMethod(null);
+        }
+    </script>
+</body>
+</html>
