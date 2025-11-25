@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Code Examples - TintOS Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        .highlight { color: #60a5fa; }
+        .string { color: #34d399; }
+        .comment { color: #94a3b8; }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold mb-2">TintOS Chatbot - Client Embedding Guide</h1>
+        <p class="text-gray-600 mb-8">How your clients will add the chatbot to their websites</p>
+
+        <!-- Option 1: Simple Embed -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Option 1: Simple Embed (Copy & Paste)</h2>
+                    <p class="text-gray-600 mt-2">✅ Easiest - No coding knowledge required</p>
+                </div>
+                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">RECOMMENDED</span>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <p class="text-blue-900">
+                    <strong>What client does:</strong> Copy this code snippet and paste before the closing <code>&lt;/body&gt;</code> tag
+                </p>
+            </div>
+
+            <div class="code-block">
+<span class="comment">&lt;!-- TintOS AI Chatbot - Add before &lt;/body&gt; tag --&gt;</span>
+<span class="highlight">&lt;script</span> <span class="string">src="https://cdn.tintos.ai/chatbot.js"</span><span class="highlight">&gt;&lt;/script&gt;</span>
+<span class="highlight">&lt;script&gt;</span>
+  TintOS.init({
+    shopId: <span class="string">'SHOP_12345'</span>,        <span class="comment">// Unique ID you provide them</span>
+    primaryColor: <span class="string">'#3b82f6'</span>,     <span class="comment">// Their brand color</span>
+    position: <span class="string">'bottom-right'</span>    <span class="comment">// Chat bubble position</span>
+  });
+<span class="highlight">&lt;/script&gt;</span>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="font-semibold text-sm text-gray-700 mb-2">Setup Time:</p>
+                    <p class="text-2xl font-bold text-green-600">2 minutes</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="font-semibold text-sm text-gray-700 mb-2">Skill Required:</p>
+                    <p class="text-2xl font-bold text-green-600">None</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: WordPress Plugin -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Option 2: WordPress Plugin</h2>
+                    <p class="text-gray-600 mt-2">🔌 For WordPress sites (70% of tint shop websites)</p>
+                </div>
+                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">POPULAR</span>
+            </div>
+
+            <div class="bg-purple-50 border-l-4 border-purple-500 p-4 mb-6">
+                <p class="text-purple-900">
+                    <strong>What client does:</strong> Install plugin, enter Shop ID, activate
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                    <div>
+                        <p class="font-semibold">Install Plugin</p>
+                        <p class="text-sm text-gray-600">WordPress Admin → Plugins → Add New → Search "TintOS"</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                    <div>
+                        <p class="font-semibold">Enter Shop ID</p>
+                        <p class="text-sm text-gray-600">Settings → TintOS → Paste their unique Shop ID</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                    <div>
+                        <p class="font-semibold">Customize (Optional)</p>
+                        <p class="text-sm text-gray-600">Choose colors, position, welcome message</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="font-semibold text-sm text-gray-700 mb-2">Setup Time:</p>
+                    <p class="text-2xl font-bold text-purple-600">5 minutes</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="font-semibold text-sm text-gray-700 mb-2">Skill Required:</p>
+                    <p class="text-2xl font-bold text-purple-600">Basic WP</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 3: Custom Integration -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Option 3: Advanced Custom Integration</h2>
+                    <p class="text-gray-600 mt-2">⚙️ For clients who want full control</p>
+                </div>
+                <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold">ADVANCED</span>
+            </div>
+
+            <div class="code-block">
+<span class="comment">// Full API Access - Complete Customization</span>
+<span class="highlight">&lt;script</span> <span class="string">src="https://cdn.tintos.ai/chatbot.js"</span><span class="highlight">&gt;&lt;/script&gt;</span>
+<span class="highlight">&lt;script&gt;</span>
+  TintOS.init({
+    shopId: <span class="string">'SHOP_12345'</span>,
+
+    <span class="comment">// Branding</span>
+    primaryColor: <span class="string">'#3b82f6'</span>,
+    logoUrl: <span class="string">'https://theirshop.com/logo.png'</span>,
+    businessName: <span class="string">'Premium Tint Shop'</span>,
+
+    <span class="comment">// Behavior</span>
+    position: <span class="string">'bottom-right'</span>,
+    autoOpen: <span class="highlight">false</span>,
+    openDelay: <span class="highlight">3000</span>,              <span class="comment">// Wait 3sec before showing</span>
+
+    <span class="comment">// Features</span>
+    features: {
+      vehicleRecognition: <span class="highlight">true</span>,
+      instantQuotes: <span class="highlight">true</span>,
+      appointmentBooking: <span class="highlight">true</span>,
+      smsNotifications: <span class="highlight">true</span>
+    },
+
+    <span class="comment">// Custom Messages</span>
+    welcomeMessage: <span class="string">'Hey! Need a tint quote? I can help! 👋'</span>,
+
+    <span class="comment">// Integrations</span>
+    calendar: {
+      provider: <span class="string">'google'</span>,
+      calendarId: <span class="string">'shop@gmail.com'</span>
+    },
+
+    <span class="comment">// Custom Pricing (optional - can sync from your dashboard)</span>
+    pricing: {
+      sedan: { ceramic: <span class="highlight">539</span>, carbon: <span class="highlight">385</span>, dyed: <span class="highlight">270</span> },
+      suv: { ceramic: <span class="highlight">689</span>, carbon: <span class="highlight">490</span>, dyed: <span class="highlight">350</span> }
+    },
+
+    <span class="comment">// Events (for tracking)</span>
+    onChatOpen: <span class="highlight">function</span>() {
+      gtag(<span class="string">'event'</span>, <span class="string">'chat_opened'</span>);
+    },
+    onQuoteGenerated: <span class="highlight">function</span>(quoteData) {
+      gtag(<span class="string">'event'</span>, <span class="string">'quote_generated'</span>, quoteData);
+    },
+    onAppointmentBooked: <span class="highlight">function</span>(appointment) {
+      gtag(<span class="string">'event'</span>, <span class="string">'appointment_booked'</span>, {
+        value: appointment.estimatedRevenue
+      });
+    }
+  });
+<span class="highlight">&lt;/script&gt;</span>
+            </div>
+        </div>
+
+        <!-- No-Code Option -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Option 4: Zero-Code (You Do It For Them)</h2>
+                    <p class="text-gray-600 mt-2">🎯 Premium service - You install for them</p>
+                </div>
+                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">WHITE GLOVE</span>
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                <p class="text-blue-900">
+                    <strong>What YOU do:</strong> Client gives you website login, you install everything
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p>You install the chatbot on their site</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p>You customize colors to match their brand</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p>You connect their calendar</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p>You set up their pricing</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <p>Client gets "done for you" service</p>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-green-50 p-4 rounded-lg">
+                <p class="text-green-900 font-semibold">💰 Charge extra for this service: $500-1000 setup fee</p>
+            </div>
+        </div>
+
+        <!-- Visual Preview -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">What The Client Sees After Installing</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Before -->
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">BEFORE (Their Old Website)</h3>
+                    <div class="border-2 border-gray-300 rounded-lg p-6 bg-gray-50 relative h-96">
+                        <div class="bg-blue-600 text-white p-4 mb-4 rounded">Header</div>
+                        <div class="bg-gray-200 h-32 mb-4 rounded"></div>
+                        <div class="bg-gray-200 h-20 mb-4 rounded"></div>
+                        <div class="bg-gray-200 h-20 rounded"></div>
+
+                        <div class="absolute bottom-4 right-4 text-red-600 font-semibold">
+                            ❌ No chat, no AI, no conversions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- After -->
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-3">AFTER (With TintOS Chatbot)</h3>
+                    <div class="border-2 border-green-500 rounded-lg p-6 bg-white relative h-96">
+                        <div class="bg-blue-600 text-white p-4 mb-4 rounded">Header</div>
+                        <div class="bg-gray-100 h-32 mb-4 rounded"></div>
+                        <div class="bg-gray-100 h-20 mb-4 rounded"></div>
+                        <div class="bg-gray-100 h-20 rounded"></div>
+
+                        <!-- Chat Bubble -->
+                        <div class="absolute bottom-4 right-4">
+                            <div class="relative">
+                                <!-- Pulse Ring -->
+                                <div class="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-75"></div>
+                                <!-- Chat Button -->
+                                <div class="relative bg-gradient-to-br from-blue-600 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl cursor-pointer hover:scale-110 transition-transform">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                    </svg>
+                                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-xs flex items-center justify-center font-bold">AI</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-24 right-6 bg-white border-2 border-blue-500 rounded-lg p-3 shadow-lg max-w-xs">
+                            <p class="text-sm text-gray-800">👋 Hey! Need a quote? I can help in 30 seconds!</p>
+                        </div>
+
+                        <div class="absolute top-4 right-4 text-green-600 font-semibold text-sm">
+                            ✅ AI Chat Active!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Table for Installation Services -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Your TintOS Installation Service Pricing (Future)</h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- DIY -->
+                <div class="border-2 border-gray-300 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-2">DIY Setup</h3>
+                    <p class="text-3xl font-bold text-blue-600 mb-4">$0</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Copy/paste code snippet
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Email support
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Video tutorials
+                        </li>
+                    </ul>
+                    <p class="text-xs text-gray-500">Best for: Tech-savvy shop owners</p>
+                </div>
+
+                <!-- Assisted Setup -->
+                <div class="border-2 border-blue-500 rounded-lg p-6 relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        POPULAR
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Assisted Setup</h3>
+                    <p class="text-3xl font-bold text-blue-600 mb-4">$297</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            30-min setup call
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            We guide you through install
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Brand customization
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Calendar integration
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Pricing setup
+                        </li>
+                    </ul>
+                    <p class="text-xs text-gray-500">Best for: Most shop owners</p>
+                </div>
+
+                <!-- White Glove -->
+                <div class="border-2 border-purple-500 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-2">White Glove</h3>
+                    <p class="text-3xl font-bold text-purple-600 mb-4">$997</p>
+                    <ul class="space-y-2 text-sm mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            We do EVERYTHING
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Full installation
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Custom branding
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Staff training (1hr)
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            30-day optimization
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Priority support
+                        </li>
+                    </ul>
+                    <p class="text-xs text-gray-500">Best for: Premium shops, multiple locations</p>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                <p class="text-yellow-900">
+                    <strong>💡 Pro Tip:</strong> Most clients will choose "Assisted Setup" at $297.
+                    That's $297 × 50 clients = $14,850 in setup fees alone (before monthly recurring!)
+                </p>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-8 text-white mt-8">
+            <h2 class="text-3xl font-bold mb-4">The Bottom Line</h2>
+            <div class="space-y-3 text-lg">
+                <p>✅ <strong>Super easy for clients</strong> - They just copy/paste 5 lines of code</p>
+                <p>✅ <strong>Or even easier</strong> - They install WordPress plugin</p>
+                <p>✅ <strong>Or YOU do it</strong> - White glove service (charge $997)</p>
+                <p>✅ <strong>Works on ANY website</strong> - HTML, WordPress, Shopify, Wix, etc.</p>
+                <p>✅ <strong>No ongoing maintenance</strong> - Updates happen automatically</p>
+                <p>✅ <strong>Clients can't break it</strong> - Hosted on your infrastructure</p>
+            </div>
+
+            <div class="mt-6 bg-white/10 rounded-lg p-4">
+                <p class="text-xl font-semibold">When you're ready to launch TintOS in 2 months, I'll build all of this for you! 🚀</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1243,5 +1243,14 @@ ls dist<!DOCTYPE html>
             });
         });
     </script>
+
+    <!-- Tintbot AI Chatbot -->
+    <script src="/components/chat-overlay.js"></script>
+    <script>
+        TintbotChat.init({
+            required: false,  // Set to true to force chat before browsing
+            apiEndpoint: '/.netlify/functions/chat-ai'
+        });
+    </script>
 </body>
 </html>
